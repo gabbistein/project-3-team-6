@@ -14,17 +14,52 @@ const userSchema = new Schema({
   google: {
     googleId: { type: String, required: false }
   },
-  photos: []
-  // local: {
-  // 	email: { type: String, unique: true },
-  // 	password: { type: String }
-  // },
-  // google: {
-  // 	id: { type: String },
-  // 	photos: []
-  // },
-  // firstName: { type: String },
-  // lastName: { type: String }
+  photos: [],
+  contacts: [
+    {
+      firstName: { type: String, unique: true },
+      lastName: { type: String, unique: true },
+      phoneNumber: { type: String, required: false },
+      email: { type: String, required: false },
+      birthdate: { type: Date, required: false },
+      notes: { body: String, required: false },
+      photos: [{ type: String, required: false }],
+      socialMedia: {
+        instagram: {
+          handle: { type: String, unique: true },
+          link: { type: String, unique: true }
+        },
+        twitter: {
+          handle: { type: String, unique: true },
+          link: { type: String, unique: true }
+        },
+        facebook: {
+          handle: { type: String, unique: true },
+          link: { type: String, unique: true }
+        },
+        linkedIn: {
+          handle: { type: String, unique: true },
+          link: { type: String, unique: true }
+        },
+        youtube: {
+          handle: { type: String, unique: true },
+          link: { type: String, unique: true }
+        },
+        reddit: {
+          handle: { type: String, unique: true },
+          link: { type: String, unique: true }
+        },
+        tumblr: {
+          handle: { type: String, unique: true },
+          link: { type: String, unique: true }
+        },
+        pinterest: {
+          handle: { type: String, unique: true },
+          link: { type: String, unique: true }
+        }
+      }
+    }
+  ]
 });
 
 // Define schema methods
