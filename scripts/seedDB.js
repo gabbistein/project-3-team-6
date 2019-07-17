@@ -19,7 +19,7 @@ const contactSeed = [
   }
 ];
 
-db.Book
+db.Contact
   .remove({})
   .then(() => db.Contact.collection.insertMany(contactSeed))
   .then(data => {
