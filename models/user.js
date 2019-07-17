@@ -15,6 +15,40 @@ const userSchema = new Schema({
     googleId: { type: String, required: false }
   },
   photos: [],
+  userSocialMedia: {
+    instagram: {
+      handle: { type: String, unique: true },
+      link: { type: String, unique: true }
+    },
+    twitter: {
+      handle: { type: String, unique: true },
+      link: { type: String, unique: true }
+    },
+    facebook: {
+      handle: { type: String, unique: true },
+      link: { type: String, unique: true }
+    },
+    linkedIn: {
+      handle: { type: String, unique: true },
+      link: { type: String, unique: true }
+    },
+    youtube: {
+      handle: { type: String, unique: true },
+      link: { type: String, unique: true }
+    },
+    reddit: {
+      handle: { type: String, unique: true },
+      link: { type: String, unique: true }
+    },
+    tumblr: {
+      handle: { type: String, unique: true },
+      link: { type: String, unique: true }
+    },
+    pinterest: {
+      handle: { type: String, unique: true },
+      link: { type: String, unique: true }
+    }
+  },
   contacts: [
     {
       firstName: { type: String, unique: true },
