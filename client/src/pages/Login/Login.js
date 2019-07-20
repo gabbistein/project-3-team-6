@@ -2,6 +2,27 @@ import React, { Component } from "react";
 import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png'
 
 class Login extends Component {
+    state = {
+        username: "",
+        password: "",
+
+    }
+
+    handleChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+          [name]: value
+        });
+      };
+
+    handleSubmit(event) {
+        event.preventDefault()
+        console.log('handleSubmit')
+        this.props._login(this.state.username, this.state.password)
+        this.setState({
+            redirectTo: '/'
+        })
+    }
 
     render() {
         return (
@@ -18,20 +39,19 @@ class Login extends Component {
                                 <input
                                     type="text"
                                     name="username"
-                                // value={this.state.username}
-                                // onChange={this.handleChange}
+                                    value={this.state.username}
+                                    onChange={this.handleChange}
                                 />
                                 <label htmlFor="password">Password: </label>
                                 <input
                                     type="password"
                                     name="password"
-                                // value={this.state.password}
-                                // onChange={this.handleChange}
+                                    value={this.state.password}
+                                    onChange={this.handleChange}
                                 />
-                                {/* <button onClick={this.handleSubmit}>Login</button> */}
+                                <button onClick={this.handleSubmit}>Login</button>
                             </form>
                             <a href="/auth/google">
-                                {/* <GoogleButton /> */}
                                 <img src={googleButton} alt="sign into Google Button" />
                             </a>
                         </div>
