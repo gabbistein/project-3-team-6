@@ -5,9 +5,15 @@
     "node": true,
     "es6": true
   },
+  "parserOptions": {
+    "sourceType": "module"
+  },
   "extends": "prettier",
   "plugins": [
-    "prettier"
+    "prettier",
+    "react",
+    "jsx-a11y",
+    "import"
   ],
   "rules": {
     "no-duplicate-case": "error",
@@ -21,6 +27,7 @@
     "eqeqeq": "error",
     "no-empty-function": "error",
     "no-multi-spaces": "error",
+    "react/no-array-index-key":"off",
     "no-unused-vars": "error",
     "indent": [
       "error",
