@@ -42,5 +42,8 @@
       "always"
     ],
     "prettier/prettier": "error"
+  },
+  "parserOptions": {
+    "sourceType": "module"
   }
 }
