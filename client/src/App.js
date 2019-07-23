@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from "./pages/Login/Login";
-import Books from "./pages/Books";
-import Detail from "./pages/Detail";
+import Login from "./pages/Login";
+import AddressBook from "./pages/AddressBook";
+import NewContactForm from "./pages/NewContactForm"; 
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
+import Facebook from "./components/FacebookLogin/login";
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route exact path="/books" component={Books} />
-          <Route exact path="/books/:id" component={Detail} />
+          <Route exact path="/addressbook" component={AddressBook} />
+          <Route exact path="/newcontact" component={NewContactForm} />
           <Route component={NoMatch} />
         </Switch>
       </div>
