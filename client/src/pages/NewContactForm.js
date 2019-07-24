@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
+import AddNewContact from "../components/AddNewContact";
 
 class NewContactForm extends Component {
   state = {
@@ -12,9 +13,7 @@ class NewContactForm extends Component {
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <Jumbotron>
-              <h1>Hello, I'm the new contact form</h1>
-            </Jumbotron>
+              <AddNewContact />
           </Col>
         </Row>
         <Row>
