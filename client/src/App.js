@@ -5,7 +5,7 @@ import AddressBook from "./pages/AddressBook";
 import NewContactForm from "./pages/NewContactForm"; 
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
-import Facebook from "./components/FacebookLogin/login";
+// import Facebook from "./components/FacebookLogin/login";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route exact path="/addressbook" component={AddressBook} />
           <Route exact path="/newcontact" component={NewContactForm} />
-          <Route component={NoMatch} />
+          {/* <Route component={NoMatch} /> */}
         </Switch>
       </div>
     </Router>

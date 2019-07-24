@@ -4,8 +4,10 @@ const keys = require("../keys")
 
 const strategy = new GoogleStrategy(
 	{
-		clientID: keys.google.clientID,
-		clientSecret: keys.google.clientSecret,
+		// clientID: keys.google.clientID,
+		clientID: "218605059762-ct7g3dfv3n3tfkqp9h8fpatuu2is671v.apps.googleusercontent.com",
+		// clientSecret: keys.google.clientSecret,
+		clientSecret: "ZMjlY85NTAqVnFSAzJCy5NZV",
 		callbackURL: '/auth/google/callback'
 	},
 	function(token, tokenSecret, profile, done) {
