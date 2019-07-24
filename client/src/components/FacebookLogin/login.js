@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
+import './style.css'
 
 export default class Facebook extends Component {
     state = {
@@ -34,7 +35,7 @@ export default class Facebook extends Component {
             )
         }
         return (
-            <div>
+            <div className="facebookLogin">
                 {fbContent}
             </div>
         )
