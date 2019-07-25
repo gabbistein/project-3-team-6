@@ -18,6 +18,7 @@ function App() {
           <Route exact path="/newcontact" component={NewContactForm} />
           <Route component={NoMatch} />
         </Switch>
+        {/* <Facebook /> */}
       </div>
     </Router>
   );
