@@ -28,10 +28,10 @@ class AddressBook extends Component {
     // ----- JSX Address Book page ----
     render() {
         return (
-            <Container fluid>
+            <Container fluid className="md-6 center">
                 <Row>
                     <Col size="md-6">
-                        <Jumbotron>
+                        <Jumbotron center>
                             <h1>Your Contacts</h1>
                             <Link to="/newContact">+ New Contact</Link>
                         </Jumbotron>

@@ -6,6 +6,7 @@ import NewContactForm from "./pages/NewContactForm";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Facebook from "./components/FacebookLogin/login";
+import FooterPage from "./components/Footer/footer";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route component={NoMatch} />
         </Switch>
         {/* <Facebook /> */}
+        <FooterPage />
       </div>
     </Router>
   );
