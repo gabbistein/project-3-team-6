@@ -11,7 +11,7 @@ function Nav() {
         My Address Book
       </a>
       <a className="navbar-brand" href="/newContact">
-        Add Contact
+        Add Contact +
       </a>
     </nav>
   );
