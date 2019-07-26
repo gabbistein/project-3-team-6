@@ -1,0 +1,11 @@
+.main-content {
+    min-height:calc(100vh - 140px);
+    display: block;
+    clear: both;
+}
+
+.main-content::after {
+    content: "";
+    clear: both;
+    display: table;
+}

@@ -6,7 +6,7 @@ class Login extends Component {
         return (
             <div>
                 <div className="container text-center">
-                    <div className="jumbotron">
+                    <div className="fluid-jumbotron">
                         <h1 className="display-4">Stem</h1>
                         <p className="lead">An app for easy stalking</p>
                         <hr className="my-4" />
