@@ -1,0 +1,9 @@
+.facebookLogin {
+    position: fixed;
+    right: 0;
+    margin: 0;
+    background-color: transparent;
+}
+.kep-login-facebook {
+    height: 72px;
+}

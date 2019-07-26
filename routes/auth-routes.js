@@ -10,12 +10,12 @@ router.get("/google", (req, res) => {
 router.get('/google/callback',
     passport.authenticate('google', { 
         successRedirect: '/',
-        failureRedirect: '/login' }),
-    function (req, res) {
-        // Successful authentication, redirect home.
-        var token = req.user.token;
-        res.redirect("http://localhost:3000?token=" + token);
-    }
+        failureRedirect: '/login' })
+    // function (req, res) {
+    //     // Successful authentication, redirect home.
+    //     var token = req.user.token;
+    //     res.redirect("http://localhost:3000?token=" + token);
+    // }
 );
 
 // this route is just used to get the user basic info
