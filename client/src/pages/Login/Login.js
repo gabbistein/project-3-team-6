@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png'
+import GoogleLogin from 'react-google-login';
 
 class Login extends Component {
     state = {
@@ -10,9 +11,9 @@ class Login extends Component {
     handleChange = event => {
         const { name, value } = event.target;
         this.setState({
-          [name]: value
+            [name]: value
         });
-      };
+    };
 
     handleSubmit(event) {
         event.preventDefault()
@@ -21,6 +22,10 @@ class Login extends Component {
         this.setState({
             redirectTo: '/'
         })
+    }
+
+    responseGoogle = (response) => {
+        console.log(response);
     }
 
     render() {
@@ -50,9 +55,16 @@ class Login extends Component {
                                 />
                                 <button onClick={this.handleSubmit}>Login</button>
                             </form>
-                            <a href="/auth/google">
+                            {/* <a href="/auth/google">
                                 <img src={googleButton} alt="sign into Google Button" />
-                            </a>
+                            </a> */}
+                            <GoogleLogin
+                                clientId="218605059762-ct7g3dfv3n3tfkqp9h8fpatuu2is671v.apps.googleusercontent.com"
+                                buttonText="Login"
+                                onSuccess={this.responseGoogle}
+                                onFailure={this.responseGoogle}
+                                cookiePolicy={'single_host_origin'}
+                            />
                         </div>
                     </div>
                 </div>

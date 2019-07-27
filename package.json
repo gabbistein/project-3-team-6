@@ -39,11 +39,7 @@
     "mongoose": "^5.3.16",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
-    "passport-google-oauth": "^2.0.0",
-    "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
-    "passport-oauth": "^1.0.0",
-    "react-facebook-login": "^4.1.1",
     "validator": "^11.1.0"
   }
 }
