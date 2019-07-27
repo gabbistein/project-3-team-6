@@ -1,28 +1,25 @@
 import React, { Component } from "react";
 import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png'
-<<<<<<< HEAD
 import GoogleLogin from 'react-google-login';
-=======
->>>>>>> d24281720d51dfee6744f1e4399fd4b87bf269a4
 
 class Login extends Component {
     state = {
+        isLoggedIn: false,
         username: "",
-        password: ""
+        password: "",
+        firstName: "",
+        lastName: "",
+        googleId: "",
+        photos: [],
+        accessToken: ""
     }
 
     handleChange = event => {
         const { name, value } = event.target;
         this.setState({
-<<<<<<< HEAD
             [name]: value
         });
     };
-=======
-          [name]: value
-        });
-      };
->>>>>>> d24281720d51dfee6744f1e4399fd4b87bf269a4
 
     handleSubmit(event) {
         event.preventDefault()
@@ -33,13 +30,23 @@ class Login extends Component {
         })
     }
 
-<<<<<<< HEAD
     responseGoogle = (response) => {
         console.log(response);
+
+        this.setState({
+            isLoggedIn: true,
+            firstName: response.profileObj.givenName,
+            lastName: response.profileObj.familyName,
+            googleId: response.googleId,
+            photos: [response.profileObj.imageUrl],
+            accessToken: response.accessToken
+        })
     }
 
-=======
->>>>>>> d24281720d51dfee6744f1e4399fd4b87bf269a4
+    responseFailure = res => {
+        res.Send("Failed to login")
+    }
+
     render() {
         return (
             <div>
@@ -68,13 +75,13 @@ class Login extends Component {
                                 <button onClick={this.handleSubmit}>Login</button>
                             </form>
 
-                            <hr />
+                            <br />
 
                             <GoogleLogin
                                 clientId="218605059762-ct7g3dfv3n3tfkqp9h8fpatuu2is671v.apps.googleusercontent.com"
                                 buttonText="Login"
                                 onSuccess={this.responseGoogle}
-                                onFailure={this.responseGoogle}
+                                onFailure={this.responseFailure}
                                 cookiePolicy={'single_host_origin'}
                             />
                         </div>
