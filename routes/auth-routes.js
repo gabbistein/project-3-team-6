@@ -3,9 +3,7 @@ const passport = require("passport");
 const User = require("../models/user");
 
 
-router.get("/google", (req, res) => {
-    passport.authenticate('google', { scope: ['profile'] })
-})
+router.get("/google", passport.authenticate('google', { scope: ['profile'] }))
 
 router.get('/google/callback',
     passport.authenticate('google', { 

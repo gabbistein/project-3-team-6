@@ -17,7 +17,7 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route exact path="/addressbook" component={AddressBook} />
           <Route exact path="/newcontact" component={NewContactForm} />
-          {/* <Route component={NoMatch} /> */}
+          <Route component={NoMatch} />
         </Switch>
         {/* <Facebook /> */}
         <FooterPage />

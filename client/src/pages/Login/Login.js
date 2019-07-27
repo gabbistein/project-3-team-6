@@ -4,8 +4,7 @@ import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_
 class Login extends Component {
     state = {
         username: "",
-        password: "",
-
+        password: ""
     }
 
     handleChange = event => {

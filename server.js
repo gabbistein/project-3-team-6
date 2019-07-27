@@ -5,14 +5,13 @@ const morgan = require("morgan");
 // const session = require("express-session");
 const mongoose = require("mongoose");
 const routes = require("./routes");
-const passport = require("./config/passport");
+const passport = require("passport");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(passport.initialize()); 
 app.use(morgan("dev"));
 app.use(
   bodyParser.urlencoded({
@@ -32,6 +31,7 @@ app.use(bodyParser.json());
 // ===== Passport ====
 app.use(passport.initialize())
 app.use(passport.session()) // will call the deserializeUser
+require("./config/passport");
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -44,6 +44,6 @@ app.use(routes);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://project6:stem1234@ds253017.mlab.com:53017/heroku_7w4p3xnt");
 
 // Start the API server
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
