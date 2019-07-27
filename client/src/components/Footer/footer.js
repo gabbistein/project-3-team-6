@@ -1,13 +1,12 @@
 import React from "react";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 // import "./style.css"
-
 function FooterPage() {
     return (
-        <div className="fixed-bottom">
+        <div className="">
             <MDBFooter color="blue" className="font-large pt-4 mt-4">
                 <MDBContainer fluid className="text-center text-md-left">
-                    <MDBRow>
+                    <MDBRow>    
                         <MDBCol md="12 center">
                             <h5 className="title">Stem Links 🌱</h5>
                             <li className="list-unstyled">
@@ -25,5 +24,4 @@ function FooterPage() {
         </div>
     );
 }
-
 export default FooterPage;
