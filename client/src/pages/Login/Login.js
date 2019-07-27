@@ -24,10 +24,10 @@ class Login extends Component {
     handleSubmit(event) {
         event.preventDefault()
         console.log('handleSubmit')
-        this.props._login(this.state.username, this.state.password)
-        this.setState({
-            redirectTo: '/'
-        })
+        // this.props._login(this.state.username, this.state.password)
+        // this.setState({
+        //     redirectTo: '/'
+        // })
     }
 
     responseGoogle = (response) => {
@@ -43,8 +43,8 @@ class Login extends Component {
         })
     }
 
-    responseFailure = res => {
-        res.Send("Failed to login")
+    responseFailure = (req, res) => {
+        console.log("Failed to login")
     }
 
     render() {
