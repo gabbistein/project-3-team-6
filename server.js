@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const routes = require("./routes");
-const passport = require("passport");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -18,11 +17,6 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-
-// ===== Passport ====
-app.use(passport.initialize())
-app.use(passport.session()) // will call the deserializeUser
-require("./config/passport");
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

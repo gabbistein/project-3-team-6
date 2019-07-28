@@ -22,15 +22,6 @@ class Login extends Component {
         });
     };
 
-    handleSubmit(event) {
-        event.preventDefault()
-        console.log('handleSubmit')
-        // this.props._login(this.state.username, this.state.password)
-        // this.setState({
-        //     redirectTo: '/'
-        // })
-    }
-
     responseGoogle = (response) => {
         console.log(response);
 
@@ -47,13 +38,13 @@ class Login extends Component {
             })
 
             let newUser = {
-               firstName: this.state.firstName,
-               lastName: this.state.lastName,
-               googleId: this.state.googleId,
-               photos: this.state.photos 
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                googleId: this.state.googleId,
+                photos: this.state.photos
             }
 
-            API.saveUser(newUser) 
+            API.saveUser(newUser)
         }
     }
 
@@ -69,36 +60,16 @@ class Login extends Component {
                         <h1 className="display-4">Stem</h1>
                         <p className="lead">An app for easy stalking</p>
                         <hr className="my-4" />
-                        <div className="LoginForm">
-                            <h1>Login form</h1>
-                            <form>
-                                <label htmlFor="username">Username: </label>
-                                <input
-                                    type="text"
-                                    name="username"
-                                    value={this.state.username}
-                                    onChange={this.handleChange}
-                                />
-                                <label htmlFor="password">Password: </label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value={this.state.password}
-                                    onChange={this.handleChange}
-                                />
-                                <button onClick={this.handleSubmit}>Login</button>
-                            </form>
 
-                            <br />
+                        <br />
 
-                            <GoogleLogin
-                                clientId="218605059762-ct7g3dfv3n3tfkqp9h8fpatuu2is671v.apps.googleusercontent.com"
-                                buttonText="Login"
-                                onSuccess={this.responseGoogle}
-                                onFailure={this.responseFailure}
-                                cookiePolicy={'single_host_origin'}
-                            />
-                        </div>
+                        <GoogleLogin
+                            clientId="218605059762-ct7g3dfv3n3tfkqp9h8fpatuu2is671v.apps.googleusercontent.com"
+                            buttonText="Login"
+                            onSuccess={this.responseGoogle}
+                            onFailure={this.responseFailure}
+                            cookiePolicy={'single_host_origin'}
+                        />
                     </div>
                 </div>
             </div>
