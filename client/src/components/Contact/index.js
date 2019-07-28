@@ -27,7 +27,7 @@ class Contact extends Component {
       <div className="container-fluid">
         <div className="Contact row">
           <div className="col s-2">
-            <img src="https://via.placeholder.com/128" />
+            <img src="https://via.placeholder.com/128" alt="Contact"/>
           </div>
           <div className="col s-4">
             <h2>{name}</h2>

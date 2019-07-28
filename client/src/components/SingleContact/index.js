@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../Grid";
 
 class SingleContact extends Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
 
-    }
+    // }
 
     handleSwap = (event) => {
         this.props.swapView("All Contacts", null, null);
