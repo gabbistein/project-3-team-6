@@ -4,6 +4,6 @@ const userRoutes = require("./user");
 
 // API routes
 router.use("/contacts", contactRoutes);
-router.use("/user", userRoutes);
+router.use("/users", userRoutes);
 
 module.exports = router;

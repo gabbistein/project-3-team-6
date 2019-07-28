@@ -2,7 +2,6 @@ require('dotenv').config()
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-// const session = require("express-session");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const passport = require("passport");
@@ -19,14 +18,6 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-// app.use(
-// 	session({
-// 		secret: process.env.APP_SECRET || 'this is the default passphrase',
-// 		store: new MongoStore({ mongooseConnection: dbConnection }),
-// 		resave: false,
-// 		saveUninitialized: false
-// 	})
-// )
 
 // ===== Passport ====
 app.use(passport.initialize())
@@ -41,7 +32,11 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://project6:stem1234@ds253017.mlab.com:53017/heroku_7w4p3xnt");
+if (process.env.NODE_ENV === "production") {
+  mongoose.connect(process.env.MONGODB_URI || "mongodb://project6:stem1234@ds253017.mlab.com:53017/heroku_7w4p3xnt");
+} else {
+  mongoose.connect("mongodb://localhost/stemdb", { useNewUrlParser: true });
+}
 
 // Start the API server
 app.listen(PORT, function () {

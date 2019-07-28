@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png'
 import GoogleLogin from 'react-google-login';
+import API from "../../utils/API";
 
 class Login extends Component {
     state = {
@@ -33,14 +34,27 @@ class Login extends Component {
     responseGoogle = (response) => {
         console.log(response);
 
-        this.setState({
-            isLoggedIn: true,
-            firstName: response.profileObj.givenName,
-            lastName: response.profileObj.familyName,
-            googleId: response.googleId,
-            photos: [response.profileObj.imageUrl],
-            accessToken: response.accessToken
-        })
+        if (this.state.isLoggedIn) {
+            console.log("Already Logged In!")
+        } else {
+            this.setState({
+                isLoggedIn: true,
+                firstName: response.profileObj.givenName,
+                lastName: response.profileObj.familyName,
+                googleId: response.googleId,
+                photos: [response.profileObj.imageUrl],
+                accessToken: response.accessToken
+            })
+
+            let newUser = {
+               firstName: this.state.firstName,
+               lastName: this.state.lastName,
+               googleId: this.state.googleId,
+               photos: this.state.photos 
+            }
+
+            API.saveUser(newUser) 
+        }
     }
 
     responseFailure = (req, res) => {
