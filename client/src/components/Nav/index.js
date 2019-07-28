@@ -1,4 +1,5 @@
 import React from "react";
+import Logout from "../Logout"
 import Facebook from "../FacebookLogin/login";
 
 function Nav() {
@@ -13,6 +14,7 @@ function Nav() {
       <a className="navbar-brand" href="/newContact">
         Add Contact +
       </a>
+      <Logout />
     </nav>
   );
 }

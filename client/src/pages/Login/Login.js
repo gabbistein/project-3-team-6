@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png'
 import GoogleLogin from 'react-google-login';
 import API from "../../utils/API";
+import Cookies from "js-cookie"
 
 class Login extends Component {
     state = {
@@ -12,7 +14,8 @@ class Login extends Component {
         lastName: "",
         googleId: "",
         photos: [],
-        accessToken: ""
+        accessToken: "",
+        redirectTo: null
     }
 
     handleChange = event => {
@@ -26,7 +29,7 @@ class Login extends Component {
         console.log(response);
 
         if (this.state.isLoggedIn) {
-            console.log("Already Logged In!")
+            alert("Already Logged In!")
         } else {
             this.setState({
                 isLoggedIn: true,
@@ -34,8 +37,12 @@ class Login extends Component {
                 lastName: response.profileObj.familyName,
                 googleId: response.googleId,
                 photos: [response.profileObj.imageUrl],
-                accessToken: response.accessToken
+                accessToken: response.accessToken,
+                redirectTo: "/addressBook"
             })
+
+            Cookies.set("access_token", response.accessToken, { domain: "" } )
+            Cookies.set("google_id", response.googleId, { domain: "" } )
 
             let newUser = {
                 firstName: this.state.firstName,
@@ -49,10 +56,14 @@ class Login extends Component {
     }
 
     responseFailure = (req, res) => {
-        console.log("Failed to login")
+        alert("Failed to login")
     }
 
     render() {
+        if (this.state.redirectTo) {
+            return <Redirect to={{ pathname: this.state.redirectTo }} />
+        }
+
         return (
             <div>
                 <div className="container text-center">
