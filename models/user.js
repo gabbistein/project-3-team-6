@@ -11,7 +11,7 @@ const userSchema = new Schema({
     password: { type: String, unique: false, required: false }
   },
   google: {
-    googleId: { type: String, required: false }
+    googleId: { type: String, unique: true, required: false }
   },
   photos: [],
   userSocialMedia: {

@@ -8,9 +8,9 @@ function FooterPage() {
                 <MDBContainer fluid className="text-center text-md-left">
                     <MDBRow>    
                         <MDBCol md="12 center">
-                            <h5 className="title">Stem Links 🌱</h5>
+                            <h5 className="title">Stem Links <span role="img" aria-label="Logo">🌱</span></h5>
                             <li className="list-unstyled">
-                                <a href="">Github Source</a>
+                                <a href="https://github.com/gabbistein/project-3-team-6">Github Source</a>
                             </li>
                         </MDBCol>
                     </MDBRow>

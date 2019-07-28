@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <div>
-        <div class="main-content">
+        <div className="main-content">
         <Nav />
         <Switch>
           <Route exact path="/" component={Login} />
