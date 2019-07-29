@@ -38,6 +38,7 @@
     "js-cookie": "^2.2.0",
     "mdbreact": "^4.18.1",
     "mongoose": "^5.3.16",
+    "mongoose-timestamp": "^0.6.0",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

@@ -26,13 +26,6 @@ let loginJumbotron = {
 class Login extends Component {
     state = {
         isLoggedIn: false,
-        username: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        googleId: "",
-        photos: [],
-        accessToken: "",
         redirectTo: null
     }
 
@@ -50,23 +43,19 @@ class Login extends Component {
             alert("Already Logged In!")
         } else {
             this.setState({
-                isLoggedIn: true,
-                firstName: response.profileObj.givenName,
-                lastName: response.profileObj.familyName,
-                googleId: response.googleId,
-                photos: [response.profileObj.imageUrl],
-                accessToken: response.accessToken,
-                redirectTo: "/addressBook"
+                isLoggedIn: true
             })
 
             Cookies.set("access_token", response.accessToken, { domain: "" } )
             Cookies.set("google_id", response.googleId, { domain: "" } )
 
             let newUser = {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                googleId: this.state.googleId,
-                photos: this.state.photos
+                firstName: response.profileObj.givenName,
+                lastName: response.profileObj.familyName,
+                google: {
+                    googleId: response.googleId
+                },
+                photos: [response.profileObj.imageUrl]
             }
 
             API.saveUser(newUser)

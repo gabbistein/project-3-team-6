@@ -12,16 +12,20 @@ class Logout extends Component {
         redirectTo: ""
     }
 
+    // componentDidUpdate(prevProps){
+        
+    //     if(this.props.)
+    //     this.setState({
+    //         redirectTo: ""
+    //     })
+    // }
+
     logout = () => {
         Cookies.remove("access_token", { domain: "" });
         Cookies.remove("google_id", { domain: "" });
 
         this.setState({
             redirectTo: "/"
-        })
-
-        this.setState({
-            redirectTo: ""
         })
     }
 

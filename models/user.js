@@ -1,51 +1,31 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-mongoose.promise = Promise;
+const timestamps = require("mongoose-timestamp");
 
 // Define userSchema
 const userSchema = new Schema({
   firstName: { type: String, unique: false },
   lastName: { type: String, unique: false },
-  local: {
-    username: { type: String, unique: false, required: false },
-    password: { type: String, unique: false, required: false }
-  },
   google: {
-    googleId: { type: String, unique: true, required: false }
+    googleId: { type: String, unique: true, required: true }
   },
   photos: [],
   userSocialMedia: {
     instagram: {
-      handle: { type: String, unique: true },
-      link: { type: String, unique: true }
+      handle: { type: String, unique: false, trim: true, required: false },
+      link: { type: String, unique: false, trim: true, required: false }
     },
     twitter: {
-      handle: { type: String, unique: true },
-      link: { type: String, unique: true }
+      handle: { type: String, unique: false, trim: true, required: false },
+      link: { type: String, unique: false, trim: true, required: false }
     },
     facebook: {
-      handle: { type: String, unique: true },
-      link: { type: String, unique: true }
+      handle: { type: String, unique: false, trim: true, required: false },
+      link: { type: String, unique: false, trim: true, required: false }
     },
     linkedIn: {
-      handle: { type: String, unique: true },
-      link: { type: String, unique: true }
-    },
-    youtube: {
-      handle: { type: String, unique: true },
-      link: { type: String, unique: true }
-    },
-    reddit: {
-      handle: { type: String, unique: true },
-      link: { type: String, unique: true }
-    },
-    tumblr: {
-      handle: { type: String, unique: true },
-      link: { type: String, unique: true }
-    },
-    pinterest: {
-      handle: { type: String, unique: true },
-      link: { type: String, unique: true }
+      handle: { type: String, unique: false, trim: true, required: false },
+      link: { type: String, unique: false, trim: true, required: false }
     }
   },
   contacts: [
@@ -59,64 +39,27 @@ const userSchema = new Schema({
       photos: [{ type: String, required: false }],
       socialMedia: {
         instagram: {
-          handle: { type: String, unique: true },
-          link: { type: String, unique: true }
+          handle: { type: String, unique: false, trim: true, required: false  },
+          link: { type: String, unique: false, trim: true, required: false  }
         },
         twitter: {
-          handle: { type: String, unique: true },
-          link: { type: String, unique: true }
+          handle: { type: String, unique: false, trim: true, required: false  },
+          link: { type: String, unique: false, trim: true, required: false  }
         },
         facebook: {
-          handle: { type: String, unique: true },
-          link: { type: String, unique: true }
+          handle: { type: String, unique: false, trim: true, required: false  },
+          link: { type: String, unique: false, trim: true, required: false  }
         },
         linkedIn: {
-          handle: { type: String, unique: true },
-          link: { type: String, unique: true }
-        },
-        youtube: {
-          handle: { type: String, unique: true },
-          link: { type: String, unique: true }
-        },
-        reddit: {
-          handle: { type: String, unique: true },
-          link: { type: String, unique: true }
-        },
-        tumblr: {
-          handle: { type: String, unique: true },
-          link: { type: String, unique: true }
-        },
-        pinterest: {
-          handle: { type: String, unique: true },
-          link: { type: String, unique: true }
+          handle: { type: String, unique: false, trim: true, required: false  },
+          link: { type: String, unique: false, trim: true, required: false  }
         }
       }
     }
   ]
 });
 
-// // Define schema methods
-// userSchema.methods = {
-//   checkPassword: function(inputPassword) {
-//     return bcrypt.compareSync(inputPassword, this.local.password);
-//   },
-//   hashPassword: plainTextPassword => {
-//     return bcrypt.hashSync(plainTextPassword, 10);
-//   }
-// };
-
-// // Define hooks for pre-saving
-// userSchema.pre("save", function(next) {
-//   if (!this.local.password) {
-//     console.log("=======NO PASSWORD PROVIDED=======");
-//     next();
-//   } else {
-//     this.local.password = this.hashPassword(this.local.password);
-//     next();
-//   }
-//   // this.password = this.hashPassword(this.password)
-//   // next()
-// });
+userSchema.plugin(timestamps);
 
 // Create reference to User & export
 const User = mongoose.model("User", userSchema);
