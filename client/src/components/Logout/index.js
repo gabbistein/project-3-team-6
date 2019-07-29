@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
+import { GoogleLogout } from 'react-google-login';
+
 
 class Logout extends Component {
     state = {
@@ -21,9 +23,10 @@ class Logout extends Component {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
         }
         return (
-            <a className="logout-btn" role="button" onClick={this.logout}>
-                Logout
-            </a>
+            <GoogleLogout
+                buttonText="Logout"
+                onLogoutSuccess={this.logout}
+            />
         );
     }
 }
