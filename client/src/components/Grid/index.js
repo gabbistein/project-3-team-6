@@ -17,7 +17,7 @@ export function Row({ fluid, children }) {
 export function Col({ size, children }) {
   return (
     <div 
-      style={{paddingLeft: 0, paddingRight: 0}}
+      style={{paddingLeft: 0, paddingRight: 0, textAlign: "center"}}
       className={size
         .split(" ")
         .map(size => "col-" + size)

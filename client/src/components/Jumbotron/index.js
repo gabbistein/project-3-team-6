@@ -1,11 +1,9 @@
 import React from "react";
-import "./style.css"
+import "./style.css";
 
 function Jumbotron({ children }) {
   return (
-    <div
-      className="jumbotron AddressBookOne" 
-    >
+    <div className="jumbotron jumbo">
       {children}
     </div>
   );
