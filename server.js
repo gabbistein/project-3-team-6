@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
+const graph = require('fbgraph');
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
@@ -24,6 +25,65 @@ if (process.env.NODE_ENV === "production") {
 }
 // Add routes, both API and view
 app.use(routes);
+
+
+
+app.get('/auth', function (req, res) {
+  // we don't have a code yet
+  // so we'll redirect to the oauth dialog
+  if (!req.query.code) {
+    console.log("Performing oauth for some user right now.");
+
+    var authUrl = graph.getOauthUrl({
+      "client_id": conf.client_id,
+      "redirect_uri": conf.redirect_uri,
+      "scope": conf.scope
+    });
+
+    if (!req.query.error) { //checks whether a user denied the app facebook login/permissions
+      res.redirect(authUrl);
+    } else {  //req.query.error == 'access_denied'
+      res.send('access denied');
+    }
+  }
+  // If this branch executes user is already being redirected back with 
+  // code (whatever that is)
+  else {
+    console.log("Oauth successful, the code (whatever it is) is: ", req.query.code);
+    // code is set
+    // we'll send that and get the access token
+    graph.authorize({
+      "client_id": conf.client_id
+      , "redirect_uri": conf.redirect_uri
+      , "client_secret": conf.client_secret
+      , "code": req.query.code
+    }, function (err, facebookRes) {
+      res.redirect('/UserHasLoggedIn');
+    });
+  }
+});
+
+graph.get('likes', { limit: 2, access_token: "foobar" }, function (err, res) {
+  if (res.paging && res.paging.next) {
+    graph.get(res.paging.next, function (err, res) {
+      // page 2
+      console.log(res);
+
+    });
+  }
+});
+
+var params = { fields: "picture" };
+
+graph.get("", params, function (err, res) {
+  console.log(res); // { picture: "http://profile.ak.fbcdn.net/..." }
+});
+
+app.get('/UserHasLoggedIn', function (req, res) {
+  res.render("index", {
+    title: "Logged In"
+  });
+});
 
 // Connect to the Mongo DB
 if (process.env.NODE_ENV === "production") {
