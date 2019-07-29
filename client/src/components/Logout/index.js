@@ -16,12 +16,29 @@ class Logout extends Component {
         this.setState({
             redirectTo: "/"
         })
+
+        this.setState({
+            redirectTo: ""
+        })
     }
+
+
 
     render() {
         if (this.state.redirectTo) {
-            return <Redirect to={{ pathname: this.state.redirectTo }} />
+            return (
+                <div>
+                    <Redirect to={{ pathname: this.state.redirectTo }} />
+                    {/* {this.setState({redirectTo: ""})} */}
+                    <GoogleLogout
+                        buttonText="Logout"
+                        onLogoutSuccess={this.logout}
+                    />
+                </div>
+            )
         }
+
+
         return (
             <GoogleLogout
                 buttonText="Logout"
