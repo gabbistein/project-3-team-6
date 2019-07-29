@@ -4,6 +4,25 @@ import GoogleLogin from 'react-google-login';
 import API from "../../utils/API";
 import Cookies from "js-cookie"
 
+let loginJumbotron = {
+    position: "absolute",
+    borderRadius: 8,
+    paddingTop: 100,
+    paddingBottom: 100,
+    marginBottom: 0,
+    width: "65%",
+    left: "50%",
+    transform: "translate(-50%,18%)",
+    title: {
+        fontFamily: "Berkshire Swash, cursive",
+        fontSize: 90,
+        fontWeight: "bold"
+    },
+    subtitle: {
+        fontStyle: "italic"
+    }
+}
+
 class Login extends Component {
     state = {
         isLoggedIn: false,
@@ -66,9 +85,9 @@ class Login extends Component {
         return (
             <div>
                 <div className="container text-center">
-                    <div className="jumbotron">
-                        <h1 className="display-4">Stem</h1>
-                        <p className="lead">An app for easy stalking</p>
+                    <div className="jumbotron" style={loginJumbotron}>
+                        <h1 className="display-4" style={loginJumbotron.title}>Stem</h1>
+                        <p className="lead" style={loginJumbotron.subtitle}>An app for easy stalking.</p>
                         <hr className="my-4" />
 
                         <br />

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import AddNewContact from "../components/AddNewContact";
+import Nav from "../components/Nav";
 
 class NewContactForm extends Component {
   state = {
@@ -10,19 +11,10 @@ class NewContactForm extends Component {
 
   render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-12">
-              <AddNewContact />
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-12">
-
-
-          </Col>
-        </Row>
-      </Container>
+      <div>
+        <Nav />
+        <AddNewContact />
+      </div>
     );
   }
 }

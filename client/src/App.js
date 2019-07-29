@@ -12,9 +12,8 @@ import './App.css'
 function App() {
   return (
     <Router>
-      <div>
+      <div className="backgroundImg">
         <div className="main-content">
-        <Nav />
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/addressbook" component={AddressBook} />
