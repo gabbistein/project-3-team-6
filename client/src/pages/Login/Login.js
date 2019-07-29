@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import GoogleLogin from 'react-google-login';
 import API from "../../utils/API";
+import Cookies from "js-cookie"
 
 let loginJumbotron = {
     position: "absolute",
@@ -30,7 +32,8 @@ class Login extends Component {
         lastName: "",
         googleId: "",
         photos: [],
-        accessToken: ""
+        accessToken: "",
+        redirectTo: null
     }
 
     handleChange = event => {
@@ -44,7 +47,7 @@ class Login extends Component {
         console.log(response);
 
         if (this.state.isLoggedIn) {
-            console.log("Already Logged In!")
+            alert("Already Logged In!")
         } else {
             this.setState({
                 isLoggedIn: true,
@@ -52,8 +55,12 @@ class Login extends Component {
                 lastName: response.profileObj.familyName,
                 googleId: response.googleId,
                 photos: [response.profileObj.imageUrl],
-                accessToken: response.accessToken
+                accessToken: response.accessToken,
+                redirectTo: "/addressBook"
             })
+
+            Cookies.set("access_token", response.accessToken, { domain: "" } )
+            Cookies.set("google_id", response.googleId, { domain: "" } )
 
             let newUser = {
                 firstName: this.state.firstName,
@@ -67,10 +74,14 @@ class Login extends Component {
     }
 
     responseFailure = (req, res) => {
-        console.log("Failed to login")
+        alert("Failed to login")
     }
 
     render() {
+        if (this.state.redirectTo) {
+            return <Redirect to={{ pathname: this.state.redirectTo }} />
+        }
+
         return (
             <div>
                 <div className="container text-center">
@@ -83,7 +94,6 @@ class Login extends Component {
 
                         <GoogleLogin
                             clientId="218605059762-ct7g3dfv3n3tfkqp9h8fpatuu2is671v.apps.googleusercontent.com"
-                            buttonText="Login"
                             onSuccess={this.responseGoogle}
                             onFailure={this.responseFailure}
                             cookiePolicy={'single_host_origin'}

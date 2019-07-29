@@ -1,5 +1,6 @@
 import React from "react";
-import Facebook from "../FacebookLogin/login";
+import Logout from "../Logout"
+// import Facebook from "../FacebookLogin/login";
 
 function Nav() {
   return (
@@ -13,6 +14,7 @@ function Nav() {
       <a className="navbar-brand" href="/newContact">
         Add Contact +
       </a>
+      <Logout />
     </nav>
   );
 }
