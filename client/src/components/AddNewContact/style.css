@@ -6,27 +6,6 @@
     background-color: pink !important;
 }
 
-.personalSection {
-    display: flex;
-    justify-content: center;
-}
-
-.socialsSection {
-    display: flex;
-    flex-direction: column;
-}
-
-.personalSection .textInputs {
-    width: 60%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.personalSection .formField {
-    width: 45%;
-    padding: 20px;
-}
-
-.socialsSection .formField {
-    width: 60%;
+.newContactContainer {
+    margin-top: 20px;
 }

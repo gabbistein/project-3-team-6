@@ -1,18 +1,17 @@
-.AddressBookOne {
-    padding-top: 25px;
-    padding-bottom: 25px;
-    height: 160px;
-    text-align: center;
-}
-.jumbotron {
-    height: 300;
-    clear: "both";
-    paddingTop: 120; 
-    textAlign: "center"; 
+.jumbo {
+    text-align: "center";
+    position: "absolute";
+    border-radius: 8px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-bottom: 0px;
+    width: 65%;
+    left: 50%;
+    transform: translate(25%);
 }
 .fluid-jumbotron {
     height: 300;
     clear: "both";
-    paddingTop: 120; 
-    textAlign: "center"; 
+    padding-top: 120; 
+    text-align: "center"; 
 }
