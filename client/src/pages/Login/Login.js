@@ -29,13 +29,6 @@ class Login extends Component {
         redirectTo: null
     }
 
-    handleChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        });
-    };
-
     responseGoogle = (response) => {
         console.log(response);
 
@@ -43,7 +36,8 @@ class Login extends Component {
             alert("Already Logged In!")
         } else {
             this.setState({
-                isLoggedIn: true
+                isLoggedIn: true,
+                redirectTo: "/addressBook"
             })
 
             Cookies.set("access_token", response.accessToken, { domain: "" } )

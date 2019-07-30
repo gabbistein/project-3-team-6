@@ -25,9 +25,9 @@ app.use(routes);
 // Connect to the Mongo DB
 mongoose.set("useCreateIndex", true); /* removes Mongodb deprecation warning */
 if (process.env.NODE_ENV === "production") {
-  mongoose.connect(process.env.MONGODB_URI || "mongodb://project6:stem1234@ds253017.mlab.com:53017/heroku_7w4p3xnt", { autoIndex: false }, { useNewUrlParser: true });
+  mongoose.connect(process.env.MONGODB_URI || "mongodb://project6:stem1234@ds253017.mlab.com:53017/heroku_7w4p3xnt", { useNewUrlParser: true, autoIndex: false });
 } else {
-  mongoose.connect("mongodb://localhost/stemdb", { autoIndex: false }, { useNewUrlParser: true });
+  mongoose.connect("mongodb://localhost/stemdb", { useNewUrlParser: true/* , autoIndex: false  */});
 }
 
 db.on("error", err => console.log(err));

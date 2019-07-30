@@ -30,8 +30,8 @@ const userSchema = new Schema({
   },
   contacts: [
     {
-      firstName: { type: String, unique: true },
-      lastName: { type: String, unique: true },
+      firstName: { type: String, unique: false },
+      lastName: { type: String, unique: false },
       phoneNumber: { type: String, required: false },
       email: { type: String, required: false },
       birthdate: { type: Date, required: false },
@@ -60,6 +60,7 @@ const userSchema = new Schema({
 });
 
 userSchema.plugin(timestamps);
+userSchema.index({contacts: 1}) /* Used for search optimization */
 
 // Create reference to User & export
 const User = mongoose.model("User", userSchema);
