@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Input, TextArea, FormBtn } from '../Form';
 import validator from 'validator';
 import Jumbotron from '../Jumbotron';
+import API from "../../utils/API";
+import Cookies from "js-cookie";
 import './style.css';
 
 class AddNewContact extends Component {
@@ -66,7 +68,26 @@ class AddNewContact extends Component {
         if (!error) {
             console.log(`No errors! Submitting ${JSON.stringify(this.state)}`);
 
+            let newContact = {
+                contacts: [{
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    email: this.state.email,
+                    birthday: this.state.birthday,
+                    phoneNumber: this.state.phoneNumber,
+                    notes: this.state.notes,
+                    socialMedia: {
+                        facebook: {link: this.state.facebook},
+                        instagram: {link: this.state.instagram},
+                        twitter: {link: this.state.twitter},
+                        linkedIn: {link: this.state.linkedIn}
+                    }
+                }]
+            }
+
             // TODO: Submission code. Note: State contains the error string.
+            console.log(JSON.stringify(newContact))
+            API.updateUser(`/${Cookies.get("google_id")}`, newContact)
 
             this.setState({
                 error: "", // Clear error message
@@ -86,7 +107,7 @@ class AddNewContact extends Component {
                     <form>
                         <h2>Personal</h2>
                         <div className="personalSection">
-                            <div class="textInputs">
+                            <div className="textInputs">
                                 <div className="formField">
                                     <label htmlFor="firstName">First name: </label>
                                     <Input
@@ -98,7 +119,7 @@ class AddNewContact extends Component {
                                     />
                                 </div>
 
-                                <div class="formField">
+                                <div className="formField">
                                     <label htmlFor="lastName">Last name: </label>
                                     <input
                                         type="text"
@@ -109,7 +130,7 @@ class AddNewContact extends Component {
                                     />
                                 </div>
 
-                                <div class="formField">
+                                <div className="formField">
                                     <label htmlFor="email">Email: </label>
                                     <Input
                                         type="email"
@@ -120,7 +141,7 @@ class AddNewContact extends Component {
                                     />
                                 </div>
 
-                                <div class="formField">
+                                <div className="formField">
                                     <label htmlFor="phoneNumber">Phone Number: </label>
                                     <Input
                                         type="tel"
@@ -131,7 +152,7 @@ class AddNewContact extends Component {
                                     />
                                 </div>
 
-                                <div class="formField">
+                                <div className="formField">
                                     <label htmlFor="birthday">Birthday: </label>
                                     <Input
                                         type="date"
@@ -143,7 +164,7 @@ class AddNewContact extends Component {
                                 </div>
                             </div>
 
-                            <div class="formField">
+                            <div className="formField">
                                 <label htmlFor="notes">Notes: </label>
                                 <TextArea
                                     name="notes"
@@ -156,7 +177,7 @@ class AddNewContact extends Component {
                         </div>
                         <div className="socialsSection">
                             <h2>Socials</h2>
-                            <div class="formField">
+                            <div className="formField">
                                 <label htmlFor="facebook">Facebook: </label>
                                 <Input
                                     type="text"
@@ -167,7 +188,7 @@ class AddNewContact extends Component {
                                 />
                             </div>
 
-                            <div class="formField">
+                            <div className="formField">
                                 <label htmlFor="instagram">Instagram: </label>
                                 <Input
                                     type="text"
@@ -178,7 +199,7 @@ class AddNewContact extends Component {
                                 />
                             </div>
 
-                            <div class="formField">
+                            <div className="formField">
                                 <label htmlFor="twitter">Twitter: </label>
                                 <Input
                                     type="text"
@@ -189,7 +210,7 @@ class AddNewContact extends Component {
                                 />
                             </div>
 
-                            <div class="formField">
+                            <div className="formField">
                                 <label htmlFor="linkedIn">LinkedIn: </label>
                                 <Input
                                     type="text"

@@ -17,6 +17,13 @@ class NewContact extends Component {
 
     }
 
+    handleChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
+
     render() {
         let confirmContact;
 

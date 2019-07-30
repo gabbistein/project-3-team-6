@@ -26,22 +26,8 @@ let loginJumbotron = {
 class Login extends Component {
     state = {
         isLoggedIn: false,
-        username: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        googleId: "",
-        photos: [],
-        accessToken: "",
         redirectTo: null
     }
-
-    handleChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        });
-    };
 
     responseGoogle = (response) => {
         console.log(response);
@@ -51,11 +37,6 @@ class Login extends Component {
         } else {
             this.setState({
                 isLoggedIn: true,
-                firstName: response.profileObj.givenName,
-                lastName: response.profileObj.familyName,
-                googleId: response.googleId,
-                photos: [response.profileObj.imageUrl],
-                accessToken: response.accessToken,
                 redirectTo: "/addressBook"
             })
 
@@ -63,10 +44,12 @@ class Login extends Component {
             Cookies.set("google_id", response.googleId, { domain: "" } )
 
             let newUser = {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                googleId: this.state.googleId,
-                photos: this.state.photos
+                firstName: response.profileObj.givenName,
+                lastName: response.profileObj.familyName,
+                google: {
+                    googleId: response.googleId
+                },
+                photos: [response.profileObj.imageUrl]
             }
 
             API.saveUser(newUser)
