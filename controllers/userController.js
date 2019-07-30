@@ -2,36 +2,32 @@ const db = require("../models");
 
 // Defining methods for the UserController
 module.exports = {
-  findAll: function(req, res) {
+  findAll: function (req, res) {
     db.User
       .find(req.query)
       .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findById: function(req, res) {
+  findById: function (req, res) {
     db.User
       .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  create: function(req, res) {
+  create: function (req, res) {
     db.User
       .create(req.body)
-      .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  update: function(req, res) {
+  update: function (req, res) {
     db.User
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => res.json(dbModel))
+      .findOneAndUpdate({ google: { googleId: req.params.id } }, req.body)
       .catch(err => res.status(422).json(err));
   },
-  remove: function(req, res) {
+  // remove contact from list
+  remove: function (req, res) {
     db.User
-      .findById({ _id: req.params.id })
+      .updateOne({ google: { googleId: req.params.id } }, { $pull: { contacts: { _id: req.params.id } } }) /* need to index each User contact in model and replace contactId with index */
       .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
 };
