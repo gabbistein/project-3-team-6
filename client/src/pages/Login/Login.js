@@ -36,23 +36,23 @@ class Login extends Component {
             alert("Already Logged In!")
         } else {
             this.setState({
-                isLoggedIn: true,
-                redirectTo: "/addressBook"
+                isLoggedIn: true
+                // redirectTo: "/addressBook"
             })
 
-            Cookies.set("access_token", response.accessToken, { domain: "" } )
-            Cookies.set("google_id", response.googleId, { domain: "" } )
+            API.saveUser(
+                {
+                    firstName: response.profileObj.givenName,
+                    lastName: response.profileObj.familyName,
+                    googleId: response.googleId,
+                    photos: [response.profileObj.imageUrl]
+                }
+            )
 
-            let newUser = {
-                firstName: response.profileObj.givenName,
-                lastName: response.profileObj.familyName,
-                google: {
-                    googleId: response.googleId
-                },
-                photos: [response.profileObj.imageUrl]
-            }
+            Cookies.set("access_token", response.accessToken, { domain: "" })
+            Cookies.set("google_id", response.googleId, { domain: "" })
 
-            API.saveUser(newUser)
+            this.props.history.push("/addressBook");
         }
     }
 

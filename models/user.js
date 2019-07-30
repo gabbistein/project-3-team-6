@@ -6,9 +6,7 @@ const timestamps = require("mongoose-timestamp");
 const userSchema = new Schema({
   firstName: { type: String, unique: false },
   lastName: { type: String, unique: false },
-  google: {
-    googleId: { type: String, unique: true, required: true }
-  },
+  googleId: { type: String, unique: true, required: true },
   photos: [],
   userSocialMedia: {
     instagram: {
@@ -39,20 +37,20 @@ const userSchema = new Schema({
       photos: [{ type: String, required: false }],
       socialMedia: {
         instagram: {
-          handle: { type: String, unique: false, trim: true, required: false  },
-          link: { type: String, unique: false, trim: true, required: false  }
+          handle: { type: String, unique: false, trim: true, required: false },
+          link: { type: String, unique: false, trim: true, required: false }
         },
         twitter: {
-          handle: { type: String, unique: false, trim: true, required: false  },
-          link: { type: String, unique: false, trim: true, required: false  }
+          handle: { type: String, unique: false, trim: true, required: false },
+          link: { type: String, unique: false, trim: true, required: false }
         },
         facebook: {
-          handle: { type: String, unique: false, trim: true, required: false  },
-          link: { type: String, unique: false, trim: true, required: false  }
+          handle: { type: String, unique: false, trim: true, required: false },
+          link: { type: String, unique: false, trim: true, required: false }
         },
         linkedIn: {
-          handle: { type: String, unique: false, trim: true, required: false  },
-          link: { type: String, unique: false, trim: true, required: false  }
+          handle: { type: String, unique: false, trim: true, required: false },
+          link: { type: String, unique: false, trim: true, required: false }
         }
       }
     }
@@ -60,7 +58,7 @@ const userSchema = new Schema({
 });
 
 userSchema.plugin(timestamps);
-userSchema.index({contacts: 1}) /* Used for search optimization */
+userSchema.index({ contacts: 1 }) /* Used for search optimization */
 
 // Create reference to User & export
 const User = mongoose.model("User", userSchema);

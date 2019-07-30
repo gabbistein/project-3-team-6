@@ -14,8 +14,19 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
-    db.User
-      .create(req.body)
+    db.User.findOne({googleId: req.body.googleId}).then((currentUser) => {
+          if(currentUser){
+            // already have the user
+            console.log("User is: ", currentUser);
+            done(null, currentUser);
+          } else {
+            // if not, create user in db
+            db.User.create(req.body).then((newUser) => {
+              console.log("new user created: " + newUser);
+              done(null, newUser);
+            })
+          }
+        })
       .catch(err => res.status(422).json(err));
   },
   update: function (req, res) {
