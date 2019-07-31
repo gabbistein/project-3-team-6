@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import GoogleLogin from 'react-google-login';
 import API from "../../utils/API";
 import Cookies from "js-cookie"
@@ -37,7 +36,6 @@ class Login extends Component {
         } else {
             this.setState({
                 isLoggedIn: true
-                // redirectTo: "/addressBook"
             })
 
             API.saveUser(
@@ -61,10 +59,6 @@ class Login extends Component {
     }
 
     render() {
-        if (this.state.redirectTo) {
-            return <Redirect to={{ pathname: this.state.redirectTo }} />
-        }
-
         return (
             <div>
                 <div className="container text-center">
