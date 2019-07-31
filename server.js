@@ -7,6 +7,11 @@ const routes = require("./routes");
 const app = express();
 const graph = require('fbgraph');
 const db = mongoose.connection;
+const cookieSession = require("cookie-session");
+const keys = require("./config/keys");
+const passport = require("passport");
+
+
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
@@ -23,6 +28,7 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use(routes);
 
+<<<<<<< HEAD
 
 
 app.get('/auth', function (req, res) {
@@ -81,6 +87,18 @@ app.get('/UserHasLoggedIn', function (req, res) {
     title: "Logged In"
   });
 });
+=======
+// Set up cookies session
+app.use(cookieSession({
+  maxAge: 24*60*60*1000, /* Maximum 1 day until need to login again */
+  keys: [keys.session.cookieKey]
+}));
+
+// Passport initialization
+app.use(passport.initialize());
+app.use(passport.session()); /* Sets up app to use the cookie session */
+
+>>>>>>> 8d041d0479a2e025640946deb37cba23284f03a4
 
 // Connect to the Mongo DB
 mongoose.set("useCreateIndex", true); /* removes Mongodb deprecation warning */
