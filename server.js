@@ -7,9 +7,7 @@ const routes = require("./routes");
 const app = express();
 const db = mongoose.connection;
 const cookieSession = require("cookie-session");
-const keys = require("./config/keys");
 const passport = require("passport");
-
 
 const PORT = process.env.PORT || 3001;
 
