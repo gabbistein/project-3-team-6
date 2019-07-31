@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
-const graph = require('fbgraph');
 const db = mongoose.connection;
 const cookieSession = require("cookie-session");
 const keys = require("./config/keys");
@@ -28,66 +27,6 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use(routes);
 
-<<<<<<< HEAD
-
-
-app.get('/auth', function (req, res) {
-  // we don't have a code yet
-  // so we'll redirect to the oauth dialog
-  if (!req.query.code) {
-    console.log("Performing oauth for some user right now.");
-
-    var authUrl = graph.getOauthUrl({
-      "client_id": conf.client_id,
-      "redirect_uri": conf.redirect_uri,
-      "scope": conf.scope
-    });
-
-    if (!req.query.error) { //checks whether a user denied the app facebook login/permissions
-      res.redirect(authUrl);
-    } else {  //req.query.error == 'access_denied'
-      res.send('access denied');
-    }
-  }
-  // If this branch executes user is already being redirected back with 
-  // code (whatever that is)
-  else {
-    console.log("Oauth successful, the code (whatever it is) is: ", req.query.code);
-    // code is set
-    // we'll send that and get the access token
-    graph.authorize({
-      "client_id": conf.client_id
-      , "redirect_uri": conf.redirect_uri
-      , "client_secret": conf.client_secret
-      , "code": req.query.code
-    }, function (err, facebookRes) {
-      res.redirect('/UserHasLoggedIn');
-    });
-  }
-});
-
-graph.get('likes', { limit: 2, access_token: "foobar" }, function (err, res) {
-  if (res.paging && res.paging.next) {
-    graph.get(res.paging.next, function (err, res) {
-      // page 2
-      console.log(res);
-
-    });
-  }
-});
-
-var params = { fields: "picture" };
-
-graph.get("", params, function (err, res) {
-  console.log(res); // { picture: "http://profile.ak.fbcdn.net/..." }
-});
-
-app.get('/UserHasLoggedIn', function (req, res) {
-  res.render("index", {
-    title: "Logged In"
-  });
-});
-=======
 // Set up cookies session
 app.use(cookieSession({
   maxAge: 24*60*60*1000, /* Maximum 1 day until need to login again */
@@ -98,7 +37,6 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session()); /* Sets up app to use the cookie session */
 
->>>>>>> 8d041d0479a2e025640946deb37cba23284f03a4
 
 // Connect to the Mongo DB
 mongoose.set("useCreateIndex", true); /* removes Mongodb deprecation warning */
