@@ -30,7 +30,7 @@ app.use(routes);
 // Set up cookies session
 app.use(cookieSession({
   maxAge: 24*60*60*1000, /* Maximum 1 day until need to login again */
-  keys: [keys.session.cookieKey]
+  keys: [process.env.COOKIE_KEY]
 }));
 
 // Passport initialization
