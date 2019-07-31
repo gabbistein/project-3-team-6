@@ -7,9 +7,7 @@ const routes = require("./routes");
 const app = express();
 const db = mongoose.connection;
 const cookieSession = require("cookie-session");
-const keys = require("./config/keys");
 const passport = require("passport");
-
 
 const PORT = process.env.PORT || 3001;
 
@@ -30,7 +28,7 @@ app.use(routes);
 // Set up cookies session
 app.use(cookieSession({
   maxAge: 24*60*60*1000, /* Maximum 1 day until need to login again */
-  keys: [keys.session.cookieKey]
+  keys: [process.env.COOKIE_KEY]
 }));
 
 // Passport initialization
