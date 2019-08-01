@@ -1,0 +1,24 @@
+.ContactDetail{
+    background-color: white;
+}
+.navButton{
+
+    padding: 20px inherit;
+}
+
+.scroller{
+    display:flex;
+    overflow-x:auto;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.scroller .card{
+    flex:0 0 auto;
+    width: 20em;
+    margin-right: 8em;
+}
+
+.scroller button p{
+    font-size: 1em;
+}
