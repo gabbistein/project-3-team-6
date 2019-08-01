@@ -13,11 +13,12 @@ class Contact extends Component {
   }
 
   socialButtonClick = (event) => {
-    console.log(`User ${event.target.dataset.userid}: ${event.target.name}`);
+    let {payload} = this.props; // This will need to be customized once
+
+    console.log(`User ${payload.id}: ${payload.firstName} ${payload.lastName}`);
     let { target } = event;
 
-    this.props.swapView("One Contact", target.dataset.userid, target.name);
-
+    this.props.swapView("One Contact", payload.id, target.name);
   }
 
   render() {
@@ -30,7 +31,7 @@ class Contact extends Component {
             <img src="https://via.placeholder.com/128" alt="Contact"/>
           </div>
           <div className="col s-4">
-            <button type="button" onClick={this.socialButtonClick}><p>{payload.firstName}</p></button>
+            <button type="button" onClick={this.socialButtonClick}><p userId={payload.id}>{payload.firstName}</p></button>
             <p>{JSON.stringify(this.props.payload)}</p>
           </div>
           <div className="col s-6">
