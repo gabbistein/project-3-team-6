@@ -109,7 +109,8 @@ class AddressBook extends Component {
                 return this.allView();
                 break;
             case "One Contact":
-                return this.oneView(viewId);
+                // return console.log(this.state.viewId);
+                return this.oneView(this.state.viewId);
                 break;
             default:
                 return <h1>Error: Attempted state mode - {this.state.mode}</h1>
@@ -132,10 +133,8 @@ class AddressBook extends Component {
     oneView = (userid) => { // Renders a single contact view
         console.log("One View", userid)
         let { contacts, socialType } = this.state;
-        console.log(contacts);
-        let thisContact = contacts.find((contact) => {
-            return contact.id === userid;
-        })
+        
+        let thisContact = contacts.find(contact => contact.id === userid);
 
         return <SingleContact payload={thisContact} socialType={socialType} swapView={this.swapView} />
     }
