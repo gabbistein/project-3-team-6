@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import Contact from "../components/Contact";
 import SingleContact from "../components/SingleContact";
+import Nav from "../components/Nav";
 
 const fakeUser = {
     id: 1,
@@ -22,7 +23,7 @@ const fakeUser = {
 class AddressBook extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             loggedIn: true,
             contacts: [ // some fake data. DELETE when real data comes in.
@@ -38,12 +39,12 @@ class AddressBook extends Component {
             viewId: null,
             socialType: null,
             flags: { // Edit this to add new filters, or load from user data
-              "All": true,
-              "Work": true,
-              "Family": true,
-              "Friends": true,
-              "People to Avoid": true,
-              "Professors": true,  
+                "All": true,
+                "Work": true,
+                "Family": true,
+                "Friends": true,
+                "People to Avoid": true,
+                "Professors": true,
             },
         };
 
@@ -51,7 +52,7 @@ class AddressBook extends Component {
 
     componentWillMount() {
     }
-    
+
     componentDidMount() {
         // this.loadContacts();
     };
@@ -67,11 +68,10 @@ class AddressBook extends Component {
     filterChange = (event) => { // When a checkbox in the filter is checked, it updates in state
         console.log('Filter Change', event.target.id, event.target.checked);
         let { flags } = this.state; // get current state of the filter
-        let {id, checked} = event.target; // get filter element id and current checked status
+        let { id, checked } = event.target; // get filter element id and current checked status
 
-        if(id === "All") { // Clicking ALL sets all checks to the same
-            for(let key of Object.keys(flags))
-            {
+        if (id === "All") { // Clicking ALL sets all checks to the same
+            for (let key of Object.keys(flags)) {
                 flags[key] = checked;
             }
         } else { // Otherwise switch the state
@@ -85,14 +85,14 @@ class AddressBook extends Component {
     }
 
     buildFilter = () => { // builds the list of filterable attributes
-        let {flags} = this.state;
+        let { flags } = this.state;
         let filterElements = [];
 
-        for(let key of Object.keys(flags)) {
+        for (let key of Object.keys(flags)) {
             filterElements.push(
                 <div key={`${key}+${Date.now()}`} className="form-check">
                     <label>
-                        <input type="checkbox" name="filter" id={key} checked={flags[key]} onChange={this.filterChange}/> <span className="label-text">{key}</span>
+                        <input type="checkbox" name="filter" id={key} checked={flags[key]} onChange={this.filterChange} /> <span className="label-text">{key}</span>
                     </label>
                 </div>
             )
@@ -104,26 +104,26 @@ class AddressBook extends Component {
     renderContactView = () => { // switches view of contact components or single contact view
         let { viewId } = this.state;
 
-        switch(this.state.mode) {
+        switch (this.state.mode) {
             case "All Contacts":
-                return this.allView();    
-            break;
+                return this.allView();
+                break;
             case "One Contact":
                 return this.oneView(viewId);
-            break;
+                break;
             default:
-                return <h1>Error: Attempted state mode - { this.state.mode }</h1>
+                return <h1>Error: Attempted state mode - {this.state.mode}</h1>
         }
-        
+
     }
 
     allView = () => { // builds list of all contacts
         let { contacts } = this.state;
-        
+
         let list = [];
-        
-        for(let contact of contacts) {
-            list.push(<Contact key={contact.id} payload={contact} swapView={this.swapView}/>);
+
+        for (let contact of contacts) {
+            list.push(<Contact key={contact.id} payload={contact} swapView={this.swapView} />);
         }
 
         return list;
@@ -134,9 +134,9 @@ class AddressBook extends Component {
         let { contacts, socialType } = this.state;
         console.log(contacts);
         let thisContact = contacts.find((contact) => {
-                return contact.id === userid;
+            return contact.id === userid;
         })
-        
+
         return <SingleContact payload={thisContact} socialType={socialType} swapView={this.swapView} />
     }
 
@@ -157,27 +157,30 @@ class AddressBook extends Component {
     // ----- JSX Address Book page ----
     render() {
         return (
-            <div className="container">
-                <Row >
-                    <Col size="sm-12 md-4">
-                        <h1>Stem</h1>
-                        <h5>An App for Easy Stalking</h5>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col size="sm-12 md-2">
-                        <button type="button">New Contact</button>
-                        <form className="filtersContainer">
-                        <div className="text-center">Filters:</div>
-                            {this.buildFilter()}
-                        </form>
-                    </Col>
-                    <Col size="sm-12 md-10">
-                        <div className="pre-scrollable"> 
-                            {this.renderContactView()}  
-                        </div>
-                    </Col>
-                </Row>
+            <div>
+                <Nav />
+                <div className="container">
+                    <Row >
+                        <Col size="sm-12 md-4">
+                            <h1>Stem</h1>
+                            <h5>An App for Easy Stalking</h5>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col size="sm-12 md-2">
+                            <button type="button">New Contact</button>
+                            <form className="filtersContainer">
+                                <div className="text-center">Filters:</div>
+                                {this.buildFilter()}
+                            </form>
+                        </Col>
+                        <Col size="sm-12 md-10">
+                            <div className="pre-scrollable">
+                                {this.renderContactView()}
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
             </div>
         );
     }

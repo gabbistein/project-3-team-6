@@ -1,29 +1,15 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Cookies from "js-cookie";
-import { GoogleLogout } from 'react-google-login';
-
-let customStyle = {
-    float: "right"
-}
 
 class Logout extends Component {
     state = {
         redirectTo: ""
     }
 
-    // componentDidUpdate(prevProps){
-        
-    //     if(this.props.)
-    //     this.setState({
-    //         redirectTo: ""
-    //     })
-    // }
-
     logout = () => {
         Cookies.remove("access_token", { domain: "" });
         Cookies.remove("google_id", { domain: "" });
-
         this.setState({
             redirectTo: "/"
         })
@@ -38,15 +24,8 @@ class Logout extends Component {
             )
         }
 
-
         return (
-            <GoogleLogout
-                buttonText="Logout"
-                onLogoutSuccess={this.logout}
-                // render={renderProps => (
-                //     <button onClick={renderProps.onClick} style={customStyle}>Logout</button>
-                // )}
-            />
+            <a onClick={this.logout}>Logout</a>
         );
     }
 }

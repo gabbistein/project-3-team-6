@@ -6,11 +6,12 @@ router.route("/")
   .get(userController.findAll)
   .post(userController.create)
 
-// Matches with "/api/contacts/:id"
+// Matches with "/api/users/:id"
 router
   .route("/:id")
   .get(userController.findById)
-  .put(userController.update)
+  .put(userController.addContact)
+  // .put(userController.update)
   .delete(userController.remove)
 
 module.exports = router;
