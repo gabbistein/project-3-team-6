@@ -37,6 +37,8 @@ class Login extends Component {
             this.setState({
                 isLoggedIn: true
             })
+            
+            console.log("Logging in...")
 
             API.saveUser(
                 {

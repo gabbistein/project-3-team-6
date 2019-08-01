@@ -14,25 +14,29 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
-    db.User.findOne({googleId: req.body.googleId}).then((currentUser) => {
-          if(currentUser){
-            // already have the user
-            console.log("User is: ", currentUser);
-            done(null, currentUser);
-          } else {
-            // if not, create user in db
-            db.User.create(req.body).then((newUser) => {
-              console.log("new user created: " + newUser);
-              done(null, newUser);
-            })
-          }
+    db.User.findOne({ googleId: req.body.googleId }).then((currentUser) => {
+      if (currentUser) {
+        // already have the user
+        console.log("User is: ", currentUser.firstName + " " + currentUser.lastName);
+        // done(null, currentUser);
+      } else {
+        // if not, create user in db
+        db.User.create(req.body).then((newUser) => {
+          console.log("new user created: " + newUser);
+          // done(null, newUser);
         })
-      .catch(err => res.status(422).json(err));
+      }
+    })
+      .catch(err => console.log(err));
+    // .catch(err => res.status(422).json(err));
   },
-  update: function (req, res) {
+  addContact: function (req, res) {
     db.User
-      .findOneAndUpdate({ google: { googleId: req.params.id } }, req.body)
-      .catch(err => res.status(422).json(err));
+      .findOneAndUpdate(
+        { googleId: req.params.id },
+        { $push: { contacts: req.body } }
+      )
+      .catch(err => console.log(err));
   },
   // remove contact from list
   remove: function (req, res) {

@@ -38,6 +38,7 @@ app.use(passport.session()); /* Sets up app to use the cookie session */
 
 // Connect to the Mongo DB
 mongoose.set("useCreateIndex", true); /* removes Mongodb deprecation warning */
+mongoose.set('useFindAndModify', false); /* removes Mongodb deprecation warning */
 if (process.env.NODE_ENV === "production") {
   mongoose.connect(process.env.MONGODB_URI || "mongodb://project6:stem1234@ds253017.mlab.com:53017/heroku_7w4p3xnt", { useNewUrlParser: true, autoIndex: false });
 } else {

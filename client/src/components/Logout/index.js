@@ -10,7 +10,6 @@ class Logout extends Component {
     logout = () => {
         Cookies.remove("access_token", { domain: "" });
         Cookies.remove("google_id", { domain: "" });
-
         this.setState({
             redirectTo: "/"
         })
