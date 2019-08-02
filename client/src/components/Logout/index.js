@@ -3,27 +3,15 @@ import { Redirect } from "react-router-dom";
 import Cookies from "js-cookie";
 import { GoogleLogout } from 'react-google-login';
 
-let buttonStyle = {
-
-}
 
 class Logout extends Component {
     state = {
         redirectTo: ""
     }
 
-    // componentDidUpdate(prevProps){
-
-    //     if(this.props.)
-    //     this.setState({
-    //         redirectTo: ""
-    //     })
-    // }
-
-    logout = () => {
+  logout = () => {
         Cookies.remove("access_token", { domain: "" });
         Cookies.remove("google_id", { domain: "" });
-
         this.setState({
             redirectTo: "/"
         })

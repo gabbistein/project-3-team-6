@@ -13,15 +13,16 @@ class Contact extends Component {
   }
 
   socialButtonClick = (event) => {
-    console.log(`User ${event.target.dataset.userid}: ${event.target.name}`);
+    let {payload} = this.props; // This will need to be customized once
+
+    console.log(`User ${payload.id}: ${payload.firstName} ${payload.lastName}`);
     let { target } = event;
 
-    this.props.swapView("One Contact", target.dataset.userid, target.name);
-
+    this.props.swapView("One Contact", payload.id, target.name);
   }
 
   render() {
-    let {id, name} = this.props.payload; // This will need to be customized once
+    let {payload} = this.props; // This will need to be customized once
 
     return(
       <div className="container-fluid">
@@ -30,14 +31,14 @@ class Contact extends Component {
             <img src="https://via.placeholder.com/128" alt="Contact"/>
           </div>
           <div className="col s-4">
-            <h2>{name}</h2>
+            <button type="button" onClick={this.socialButtonClick}><p userId={payload.id}>{payload.firstName}</p></button>
             <p>{JSON.stringify(this.props.payload)}</p>
           </div>
           <div className="col s-6">
-          <button id="facebook" name="Facebook" data-userid={id} onClick={this.socialButtonClick}>Facebook</button>
-          <button id="instagram" name="Instagram" data-userid={id} onClick={this.socialButtonClick}>Instagram</button>
-          <button id="twitter" name="Twitter" data-userid={id} onClick={this.socialButtonClick}>Twitter</button>
-          <button id="linkedIn" name="LinkedIn" data-userid={id} onClick={this.socialButtonClick}>LinkedIn</button>
+          <button id="facebook" name="Facebook" data-userid={payload.id} onClick={this.socialButtonClick}>Facebook</button>
+          <button id="instagram" name="Instagram" data-userid={payload.id} onClick={this.socialButtonClick}>Instagram</button>
+          <button id="twitter" name="Twitter" data-userid={payload.id} onClick={this.socialButtonClick}>Twitter</button>
+          <button id="linkedIn" name="LinkedIn" data-userid={payload.id} onClick={this.socialButtonClick}>LinkedIn</button>
           </div>
         </div>
       </div>

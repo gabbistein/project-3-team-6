@@ -16,7 +16,7 @@ class SingleContact extends Component {
 
         return (
             <div className="SingleContact">
-                <h1>{payload.name}</h1>
+                <h1>{payload.firstName}</h1>
                 <p>{JSON.stringify(payload)}</p>
                 <p>Showing {socialType}</p>
                 <button onClick={this.handleSwap}>Back</button>

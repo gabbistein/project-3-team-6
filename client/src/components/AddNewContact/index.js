@@ -86,25 +86,23 @@ class AddNewContact extends Component {
             console.log(`No errors! Submitting ${JSON.stringify(this.state)}`);
 
             let newContact = {
-                contacts: [{
-                    firstName: this.state.firstName,
-                    lastName: this.state.lastName,
-                    email: this.state.email,
-                    birthday: this.state.birthday,
-                    phoneNumber: this.state.phoneNumber,
-                    notes: this.state.notes,
-                    socialMedia: {
-                        facebook: { link: this.state.facebook },
-                        instagram: { link: this.state.instagram },
-                        twitter: { link: this.state.twitter },
-                        linkedIn: { link: this.state.linkedIn }
-                    }
-                }]
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                email: this.state.email,
+                birthday: this.state.birthday,
+                phoneNumber: this.state.phoneNumber,
+                notes: this.state.notes,
+                socialMedia: {
+                    facebook: { link: this.state.facebook },
+                    instagram: { link: this.state.instagram },
+                    twitter: { link: this.state.twitter },
+                    linkedIn: { link: this.state.linkedIn }
+                }
             }
 
-            // TODO: Submission code. Note: State contains the error string.
+            // TODO: Submission code. Fix the client side api request. parameters may be messed up.
             console.log(JSON.stringify(newContact))
-            API.updateUser(`/${Cookies.get("google_id")}`, newContact)
+            API.addContact(`/${Cookies.get("google_id")}`, newContact)
 
             this.setState({
                 error: "", // Clear error message

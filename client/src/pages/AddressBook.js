@@ -6,7 +6,6 @@ import { Input, TextArea, FormBtn } from "../components/Form";
 import Contact from "../components/Contact";
 import SingleContact from "../components/SingleContact";
 import Nav from "../components/Nav";
-import AddressBookJumbo from "../components/AddressBookJumbo";
 
 let addressStyle = {
     button: {
@@ -20,6 +19,20 @@ let addressStyle = {
     }
 }
 
+const fakeUser = {
+    id: 1,
+    firstName: "Vish",
+    lastName: "Diwan",
+    email: "vishdiwan@gmail.com",
+    birthday: "1991-11-29",
+    phoneNumber: "253-334-5715",
+    facebook: "https://www.facebook.com/vishdiwan",
+    instagram: "https://www.instagram.com/vishdiwan",
+    twitter: "https://www.twitter.com/vishdiwan",
+    linkedIn: "https://www.linkedin.com/vishdiwan",
+    notes: "Real cool guy, favorite contact",
+}
+
 class AddressBook extends Component {
     constructor(props) {
         super(props);
@@ -27,12 +40,12 @@ class AddressBook extends Component {
         this.state = {
             loggedIn: true,
             contacts: [ // some fake data. DELETE when real data comes in.
-                { id: "764838", name: "Tester 1" },
-                { id: "7asfds38", name: "Tester 2" },
-                { id: "43938", name: "Tester 3" },
-                { id: "4393r8", name: "Tester 4" },
-                { id: "439qq38", name: "Tester 5" },
-                { id: "439asd38", name: "Tester 6" },
+                fakeUser,
+                fakeUser,
+                fakeUser,
+                fakeUser,
+                fakeUser,
+
             ],
             filteredContacts: [], // Once filtering is decided.
             mode: "All Contacts", // or "One Contact",
@@ -109,7 +122,8 @@ class AddressBook extends Component {
                 return this.allView();
                 break;
             case "One Contact":
-                return this.oneView(viewId);
+                // return console.log(this.state.viewId);
+                return this.oneView(this.state.viewId);
                 break;
             default:
                 return <h1>Error: Attempted state mode - {this.state.mode}</h1>
@@ -132,10 +146,8 @@ class AddressBook extends Component {
     oneView = (userid) => { // Renders a single contact view
         console.log("One View", userid)
         let { contacts, socialType } = this.state;
-        console.log(contacts);
-        let thisContact = contacts.find((contact) => {
-            return contact.id === userid;
-        })
+        
+        let thisContact = contacts.find(contact => contact.id === userid);
 
         return <SingleContact payload={thisContact} socialType={socialType} swapView={this.swapView} />
     }
