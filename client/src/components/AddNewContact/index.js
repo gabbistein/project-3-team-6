@@ -6,6 +6,23 @@ import API from "../../utils/API";
 import Cookies from "js-cookie";
 import './style.css';
 
+let contactStyle = {
+    title: {
+        fontFamily: "Berkshire Swash, cursive",
+        fontSize: 40,
+        fontWeight: "bold",
+        paddingBottom: 10
+    },
+    headers: {
+        fontSize: 30,
+        paddingBottom: 5,
+        fontStyle: "italic"
+    },
+    button: {
+        color: "white"
+    }
+}
+
 class AddNewContact extends Component {
     constructor(props) {
         super(props);
@@ -101,9 +118,9 @@ class AddNewContact extends Component {
         return (
             <div className="newContactContainer">
                 <Jumbotron>
-                    <h1>New Contact</h1>
+                    <h1 style={contactStyle.title}>New Contact</h1>
                     <form>
-                        <h2>Personal</h2>
+                        <h2 style={contactStyle.headers}>Personal</h2>
                         <div className="personalSection">
                             <div className="textInputs">
                                 <div className="formField">
@@ -174,7 +191,7 @@ class AddNewContact extends Component {
                             </div>
                         </div>
                         <div className="socialsSection">
-                            <h2>Socials</h2>
+                            <h2 style={contactStyle.headers}>Socials</h2>
                             <div className="formField">
                                 <label htmlFor="facebook">Facebook: </label>
                                 <Input
@@ -220,7 +237,7 @@ class AddNewContact extends Component {
                             </div>
                         </div>
                         <p className="errorMsg">{this.state.error}</p>
-                        <button onClick={this.handleSubmit}>Add Contact</button>
+                        <a className="waves-effect waves-light btn-large red" onClick={this.handleSubmit}><span style={contactStyle.button}>New Contact</span></a>
                     </form>
                 </Jumbotron>
             </div>

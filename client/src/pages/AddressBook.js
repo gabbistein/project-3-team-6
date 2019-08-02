@@ -7,6 +7,18 @@ import Contact from "../components/Contact";
 import SingleContact from "../components/SingleContact";
 import Nav from "../components/Nav";
 
+let addressStyle = {
+    button: {
+        color: "white"
+    },
+    title: {
+        fontFamily: "Berkshire Swash, cursive",
+        fontSize: 40,
+        fontWeight: "bold",
+        paddingLeft: 15
+    }
+}
+
 const fakeUser = {
     id: 1,
     firstName: "Vish",
@@ -20,6 +32,7 @@ const fakeUser = {
     linkedIn: "https://www.linkedin.com/vishdiwan",
     notes: "Real cool guy, favorite contact",
 }
+
 class AddressBook extends Component {
     constructor(props) {
         super(props);
@@ -159,26 +172,28 @@ class AddressBook extends Component {
             <div>
                 <Nav />
                 <div className="container">
-                    <Row >
-                        <Col size="sm-12 md-4">
-                            <h1>Stem</h1>
-                            <h5>An App for Easy Stalking</h5>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col size="sm-12 md-2">
-                            <button type="button">New Contact</button>
-                            <form className="filtersContainer">
-                                <div className="text-center">Filters:</div>
-                                {this.buildFilter()}
-                            </form>
-                        </Col>
-                        <Col size="sm-12 md-10">
-                            <div className="pre-scrollable">
-                                {this.renderContactView()}
-                            </div>
-                        </Col>
-                    </Row>
+                    <AddressBookJumbo>
+                        <Row >
+                            <h1 style={addressStyle.title}>Your Address Book</h1>
+                        </Row>
+                        <Row>
+                            <Col size="sm-12 md-2">
+                                <div className="text-center">
+                                    <a className="waves-effect waves-light btn-small red"><span style={addressStyle.button}>New Contact</span></a>
+                                </div>
+                                <br></br>
+                                <form className="filtersContainer">
+                                    <div className="text-center">Filters:</div>
+                                    {this.buildFilter()}
+                                </form>
+                            </Col>
+                            <Col size="sm-12 md-10">
+                                <div className="pre-scrollable">
+                                    {this.renderContactView()}
+                                </div>
+                            </Col>
+                        </Row>
+                    </AddressBookJumbo>
                 </div>
             </div>
         );
