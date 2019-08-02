@@ -6,6 +6,7 @@ import { Input, TextArea, FormBtn } from "../components/Form";
 import Contact from "../components/Contact";
 import SingleContact from "../components/SingleContact";
 import Nav from "../components/Nav";
+import AddressBookJumbo from "../components/AddressBookJumbo"
 
 const fakeUser = {
     id: 1,
@@ -31,8 +32,7 @@ class AddressBook extends Component {
                 fakeUser,
                 fakeUser,
                 fakeUser,
-                fakeUser,
-
+                fakeUser
             ],
             filteredContacts: [], // Once filtering is decided.
             mode: "All Contacts", // or "One Contact",
@@ -47,7 +47,6 @@ class AddressBook extends Component {
                 "Professors": true,
             },
         };
-
     }
 
     componentWillMount() {
@@ -133,7 +132,7 @@ class AddressBook extends Component {
     oneView = (userid) => { // Renders a single contact view
         console.log("One View", userid)
         let { contacts, socialType } = this.state;
-        
+
         let thisContact = contacts.find(contact => contact.id === userid);
 
         return <SingleContact payload={thisContact} socialType={socialType} swapView={this.swapView} />
@@ -148,9 +147,9 @@ class AddressBook extends Component {
         })
     }
 
-    // ----- TO DO: -----
+    addContact = () => this.props.history.push("/newContact")
 
-    // Add contact deletion here
+    // ----- TO DO: -----
     // Users social media login?
 
     // ----- JSX Address Book page ----
@@ -159,26 +158,28 @@ class AddressBook extends Component {
             <div>
                 <Nav />
                 <div className="container">
-                    <Row >
-                        <Col size="sm-12 md-4">
-                            <h1>Stem</h1>
-                            <h5>An App for Easy Stalking</h5>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col size="sm-12 md-2">
-                            <button type="button">New Contact</button>
-                            <form className="filtersContainer">
-                                <div className="text-center">Filters:</div>
-                                {this.buildFilter()}
-                            </form>
-                        </Col>
-                        <Col size="sm-12 md-10">
-                            <div className="pre-scrollable">
-                                {this.renderContactView()}
-                            </div>
-                        </Col>
-                    </Row>
+                    <AddressBookJumbo>
+                        <Row >
+                            <Col size="sm-12 md-4">
+                                <h1>Stem</h1>
+                                <h5>An App for Easy Stalking</h5>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col size="sm-12 md-2">
+                                <button type="button" onClick={this.addContact}>New Contact</button>
+                                <form className="filtersContainer">
+                                    <div className="text-center">Filters:</div>
+                                    {this.buildFilter()}
+                                </form>
+                            </Col>
+                            <Col size="sm-12 md-10">
+                                <div className="pre-scrollable">
+                                    {this.renderContactView()}
+                                </div>
+                            </Col>
+                        </Row>
+                    </AddressBookJumbo>
                 </div>
             </div>
         );

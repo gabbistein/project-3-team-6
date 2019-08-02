@@ -55,9 +55,13 @@ function FooterPage() {
             <div style={phantom} />
             <div style={style}>
                 <div style={divStyle}>
-                    <a href="https://github.com/gabbistein/project-3-team-6">Stem Source <span role="img" aria-label="Logo">🌱</span></a>
+                    <a href="https://github.com/gabbistein/project-3-team-6" target="_blank">Stem Source <span role="img" aria-label="Logo">🌱</span></a>
                 </div>
-                <div> &copy; {new Date().getFullYear()} Copyright: <a href="https://github.com/gabbistein/">Gabbi Stein</a>, <a href="https://github.com/connorleee/">Connor Lee</a>, <a href="https://github.com/brandonlublin/">Brandon Lublin</a>, <a href="https://github.com/vishaaldiwan/">Vishaal Diwan</a>
+                <div> &copy; {new Date().getFullYear()} Copyright: 
+                    <a href="https://github.com/gabbistein/" target="_blank">Gabbi Stein</a>, 
+                    <a href="https://github.com/connorleee/" target="_blank">Connor Lee</a>, 
+                    <a href="https://github.com/brandonlublin/" target="_blank">Brandon Lublin</a>, 
+                    <a href="https://github.com/vishaaldiwan/" target="_blank">Vishaal Diwan</a>
                 </div>
             </div>
         </div>
