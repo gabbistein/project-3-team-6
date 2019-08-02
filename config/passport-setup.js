@@ -18,7 +18,7 @@ passport.use(new TumblrStrategy({
     consumerSecret: keys.tumblrAuthSecret,
     callbackURL: "http://localhost:3000/auth/tumblr/callback"
 },
-    (token, tokenSecret, profile, done) => {
+    ( consumerKey, consumerSecret, profile, done) => {
         User.findOrCreate({ tumblrId: profile.id }, function (err, user) {
             return done(err, user);
         });
@@ -26,3 +26,4 @@ passport.use(new TumblrStrategy({
         
     }
 ));
+
