@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import API from "../../utils/API";
 import "./style.css";
 
 class ContactDetail extends Component {

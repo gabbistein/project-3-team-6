@@ -1,15 +1,9 @@
 import React from "react";
-import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 import { relative } from "path";
 
 let style = {
     backgroundColor: "#fbbc05",
     textAlign: "center",
-    // paddingTop: 0,
-    // position: "fixed",
-    // left: 0,
-    // bottom: 0,
-    // height: 80,
     width: "100%",
     backgroundClip: "content-box",
     borderTopWidth: "7px",
