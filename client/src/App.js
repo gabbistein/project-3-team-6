@@ -27,15 +27,16 @@ class App extends Component {
     return (
       <Router>
         <div className="backgroundImg">
-          <div className="main-content">
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route exact path="/addressbook" component={AddressBook} />
-              <Route exact path="/newcontact" component={NewContactForm} />
-              <Route exact path="/contactdetail" component={ContactDetail} />
-              <Route component={NoMatch} />
-            </Switch>
-            {/* <Facebook /> */}
+          <div className="Site">
+            <div className="Site-content">
+              <Switch>
+                <Route exact path="/" component={Login} />
+                <Route exact path="/addressbook" component={AddressBook} />
+                <Route exact path="/newcontact" component={NewContactForm} />
+                <Route exact path="/contactdetail" component={ContactDetail} />
+                <Route component={NoMatch} />
+              </Switch>
+            </div>
           </div>
           <Footer />
         </div>
