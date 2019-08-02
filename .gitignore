@@ -21,6 +21,7 @@
 .env.production.local
 .env
 /config/keys.js
+/client/src/keys.js
 
 npm-debug.log*
 yarn-debug.log*
