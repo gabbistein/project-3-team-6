@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../Grid";
 import tumblr from "tumblr.js"
-import keys from "../../keys"
 
 class SingleContact extends Component {
     constructor(props) {
@@ -18,12 +17,12 @@ class SingleContact extends Component {
     
     queryTumblr = () => {
         let userBlogName = this.state.name;
-        var client = tumblr.createClient({ consumer_key: keys.tumblrAuthConsumerKey });
+        var client = tumblr.createClient({ consumer_key: process.env.tumblrAuthConsumerKey });
         //this is querying the tumblr blog method, pulls back an object of basic info
         
         console.log(this.state);
     }
-    
+
     componentDidMount() {
         this.queryTumblr();
         
