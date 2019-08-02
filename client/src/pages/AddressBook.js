@@ -8,6 +8,18 @@ import SingleContact from "../components/SingleContact";
 import Nav from "../components/Nav";
 import AddressBookJumbo from "../components/AddressBookJumbo"
 
+let addressStyle = {
+    button: {
+        color: "white"
+    },
+    title: {
+        fontFamily: "Berkshire Swash, cursive",
+        fontSize: 40,
+        fontWeight: "bold",
+        paddingLeft: 15
+    }
+}
+
 const fakeUser = {
     id: 1,
     firstName: "Vish",
@@ -21,6 +33,7 @@ const fakeUser = {
     linkedIn: "https://www.linkedin.com/vishdiwan",
     notes: "Real cool guy, favorite contact",
 }
+
 class AddressBook extends Component {
     constructor(props) {
         super(props);
@@ -32,7 +45,8 @@ class AddressBook extends Component {
                 fakeUser,
                 fakeUser,
                 fakeUser,
-                fakeUser
+                fakeUser,
+
             ],
             filteredContacts: [], // Once filtering is decided.
             mode: "All Contacts", // or "One Contact",
@@ -47,6 +61,7 @@ class AddressBook extends Component {
                 "Professors": true,
             },
         };
+
     }
 
     componentWillMount() {
@@ -132,7 +147,7 @@ class AddressBook extends Component {
     oneView = (userid) => { // Renders a single contact view
         console.log("One View", userid)
         let { contacts, socialType } = this.state;
-
+        
         let thisContact = contacts.find(contact => contact.id === userid);
 
         return <SingleContact payload={thisContact} socialType={socialType} swapView={this.swapView} />
@@ -147,9 +162,9 @@ class AddressBook extends Component {
         })
     }
 
-    addContact = () => this.props.history.push("/newContact")
-
     // ----- TO DO: -----
+
+    // Add contact deletion here
     // Users social media login?
 
     // ----- JSX Address Book page ----
@@ -160,14 +175,14 @@ class AddressBook extends Component {
                 <div className="container">
                     <AddressBookJumbo>
                         <Row >
-                            <Col size="sm-12 md-4">
-                                <h1>Stem</h1>
-                                <h5>An App for Easy Stalking</h5>
-                            </Col>
+                            <h1 style={addressStyle.title}>Your Address Book</h1>
                         </Row>
                         <Row>
                             <Col size="sm-12 md-2">
-                                <button type="button" onClick={this.addContact}>New Contact</button>
+                                <div className="text-center">
+                                    <a className="waves-effect waves-light btn-small red"><span style={addressStyle.button}>New Contact</span></a>
+                                </div>
+                                <br></br>
                                 <form className="filtersContainer">
                                     <div className="text-center">Filters:</div>
                                     {this.buildFilter()}
