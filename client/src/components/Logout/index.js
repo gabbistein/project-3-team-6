@@ -3,8 +3,8 @@ import { Redirect } from "react-router-dom";
 import Cookies from "js-cookie";
 import { GoogleLogout } from 'react-google-login';
 
-let customStyle = {
-    float: "right"
+let buttonStyle = {
+
 }
 
 class Logout extends Component {
@@ -13,7 +13,7 @@ class Logout extends Component {
     }
 
     // componentDidUpdate(prevProps){
-        
+
     //     if(this.props.)
     //     this.setState({
     //         redirectTo: ""
@@ -38,15 +38,15 @@ class Logout extends Component {
             )
         }
 
-
         return (
-            <GoogleLogout
-                buttonText="Logout"
-                onLogoutSuccess={this.logout}
-                // render={renderProps => (
-                //     <button onClick={renderProps.onClick} style={customStyle}>Logout</button>
-                // )}
-            />
+            // <GoogleLogout
+            //     buttonText="Logout"
+            //     onLogoutSuccess={this.logout}
+            // // render={renderProps => (
+            // //     <button onClick={renderProps.onClick} >Logout</button>
+            // // )}
+            // />
+            <a onClick={this.logout} className="waves-effect waves-light btn-large red" style={buttonStyle}>Logout</a>
         );
     }
 }
