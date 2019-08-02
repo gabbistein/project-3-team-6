@@ -21,24 +21,34 @@ class Contact extends Component {
     this.props.swapView("One Contact", payload.id, target.name);
   }
 
-  render() {
+  removeButtonClick = (event) => {
     let { payload } = this.props; // This will need to be customized once
 
+    console.log(`User ${payload.id}: ${payload.firstName} ${payload.lastName}`);
+    let { target } = event;
+
+    this.props.deleteContact(payload.id);
+  }
+
+  render() {
+    let { payload } = this.props; // This will need to be customized once
+    console.log(payload);
     return (
       <div className="container-fluid">
         <div className="Contact row">
-          <div className="col s-2">
+          <div className="col-sm-2 align-self-center">
             <img src="https://via.placeholder.com/128" alt="Contact" />
           </div>
-          <div className="col s-4">
-            <button type="button" onClick={this.socialButtonClick}><p userId={payload.id}>{payload.firstName}</p></button>
-            <p>{JSON.stringify(this.props.payload)}</p>
+          <div className="col-sm-2 align-self-center">
+            <button className="btn" type="button" onClick={console.log("name click", payload.id)} data-userid={payload.id}><p>{payload.firstName}</p></button>
           </div>
-          <div className="col s-6">
-            <button id="facebook" name="Facebook" data-userid={payload.id} onClick={this.socialButtonClick}>Facebook</button>
-            <button id="instagram" name="Instagram" data-userid={payload.id} onClick={this.socialButtonClick}>Instagram</button>
-            <button id="twitter" name="Twitter" data-userid={payload.id} onClick={this.socialButtonClick}>Twitter</button>
-            <button id="linkedIn" name="LinkedIn" data-userid={payload.id} onClick={this.socialButtonClick}>LinkedIn</button>
+          <div className="col-sm-2 align-self-center">
+            <button className="btn" type="button" onClick={this.removeButtonClick} data-userid={payload.id}><p>Remove</p></button>
+          </div>
+          <div className="col-sm-6 align-self-center">
+            <button className="btn" id="twitter" name="twitter" data-userid={payload.id} onClick={this.socialButtonClick}>Twitter</button>
+            <button className="btn" id="tumblr" name="tumblr" data-userid={payload.id} onClick={this.socialButtonClick}>Tumblr</button>
+            <button className="btn" id="pinterest" name="pinterest" data-userid={payload.id} onClick={this.socialButtonClick}>Pinterest</button>
           </div>
         </div>
       </div>

@@ -20,34 +20,32 @@ let addressStyle = {
     }
 }
 
-const fakeUser = {
-    id: 1,
-    firstName: "Vish",
-    lastName: "Diwan",
-    email: "vishdiwan@gmail.com",
-    birthday: "1991-11-29",
-    phoneNumber: "253-334-5715",
-    facebook: "https://www.facebook.com/vishdiwan",
-    instagram: "https://www.instagram.com/vishdiwan",
-    twitter: "https://www.twitter.com/vishdiwan",
-    linkedIn: "https://www.linkedin.com/vishdiwan",
-    notes: "Real cool guy, favorite contact",
+var fakeUsers=[];
+function fakeUser(id) {
+    return{
+        id:id,
+        firstName: "Vish",
+        lastName: "Diwan",
+        email: "vishdiwan@gmail.com",
+        birthday: "1991-11-29",
+        phoneNumber: "253-334-5715",
+        facebook: "https://www.facebook.com/vishdiwan",
+        instagram: "https://www.instagram.com/vishdiwan",
+        twitter: "https://www.twitter.com/vishdiwan",
+        linkedIn: "https://www.linkedin.com/vishdiwan",
+        notes: "Real cool guy, favorite contact",
+    }
 }
-
+for (let i = 0; i < 4; i++) {
+    fakeUsers.push(fakeUser(i))
+}
 class AddressBook extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             loggedIn: true,
-            contacts: [ // some fake data. DELETE when real data comes in.
-                fakeUser,
-                fakeUser,
-                fakeUser,
-                fakeUser,
-                fakeUser,
-
-            ],
+            contacts: fakeUsers, //TODO: will need to pull from API
             filteredContacts: [], // Once filtering is decided.
             mode: "All Contacts", // or "One Contact",
             viewId: null,
@@ -68,8 +66,17 @@ class AddressBook extends Component {
     }
 
     componentDidMount() {
+        console.log("address book mounted", this.state.contacts);
         // this.loadContacts();
     };
+
+    deleteContact = (id) => { //TODO need to delete from database
+        let {contacts} = this.state;
+        contacts.splice(id,1);
+        this.setState ({
+            contacts, 
+        })
+    }
 
     // loadContacts = () => {
     //     API.getContacts()
@@ -138,7 +145,7 @@ class AddressBook extends Component {
         let list = [];
 
         for (let contact of contacts) {
-            list.push(<Contact key={contact.id} payload={contact} swapView={this.swapView} />);
+            list.push(<Contact key={contact.id} payload={contact} swapView={this.swapView} deleteContact={this.deleteContact}/>);
         }
 
         return list;
