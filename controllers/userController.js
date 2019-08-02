@@ -13,6 +13,22 @@ module.exports = {
       .findById(req.params.id)
       .catch(err => res.status(422).json(err));
   },
+  findSocial: function (req, res) {
+    // find userId
+    // find contactId
+    // find social handle
+
+    db.User.findOne({
+      googleId: req.params.id,
+      contacts: { $elemMatch: { _id: req.params.contactId } }
+    }).then((currentUser) => {
+      console.log(currentUser) /* Array of objects */
+
+      let socialHandle = currentUser.socialMedia
+
+      console.log(socialHandle)
+    })
+  },
   create: function (req, res) {
     db.User.findOne({ googleId: req.body.googleId }).then((currentUser) => {
       if (currentUser) {

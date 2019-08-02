@@ -11,7 +11,11 @@ router
   .route("/:id")
   .get(userController.findById)
   .put(userController.addContact)
-  // .put(userController.update)
   .delete(userController.remove)
+
+// Matches with "/api/users/:id/:social"
+router
+  .route("/:id/:contactId/:social")
+  .get(userController.findSocial)
 
 module.exports = router;

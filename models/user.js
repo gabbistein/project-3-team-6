@@ -9,19 +9,15 @@ const userSchema = new Schema({
   googleId: { type: String, unique: true, required: true },
   photos: [],
   userSocialMedia: {
-    instagram: {
-      handle: { type: String, unique: false, trim: true, required: false },
-      link: { type: String, unique: false, trim: true, required: false }
-    },
     twitter: {
       handle: { type: String, unique: false, trim: true, required: false },
       link: { type: String, unique: false, trim: true, required: false }
     },
-    facebook: {
+    tumblr: {
       handle: { type: String, unique: false, trim: true, required: false },
       link: { type: String, unique: false, trim: true, required: false }
     },
-    linkedIn: {
+    pinterest: {
       handle: { type: String, unique: false, trim: true, required: false },
       link: { type: String, unique: false, trim: true, required: false }
     }
@@ -36,19 +32,15 @@ const userSchema = new Schema({
       notes: { body: String, required: false },
       photos: [{ type: String, required: false }],
       socialMedia: {
-        instagram: {
-          handle: { type: String, unique: false, trim: true, required: false },
-          link: { type: String, unique: false, trim: true, required: false }
-        },
         twitter: {
           handle: { type: String, unique: false, trim: true, required: false },
           link: { type: String, unique: false, trim: true, required: false }
         },
-        facebook: {
+        tumblr: {
           handle: { type: String, unique: false, trim: true, required: false },
           link: { type: String, unique: false, trim: true, required: false }
         },
-        linkedIn: {
+        pinterest: {
           handle: { type: String, unique: false, trim: true, required: false },
           link: { type: String, unique: false, trim: true, required: false }
         }

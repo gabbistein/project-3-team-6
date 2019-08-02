@@ -33,10 +33,9 @@ class AddNewContact extends Component {
             email: "",
             birthday: "",
             phoneNumber: "",
-            facebook: "",
-            instagram: "",
             twitter: "",
-            linkedIn: "",
+            tumblr: "",                
+            pinterest: "",
             notes: "",
             error: "",
         }
@@ -93,10 +92,9 @@ class AddNewContact extends Component {
                 phoneNumber: this.state.phoneNumber,
                 notes: this.state.notes,
                 socialMedia: {
-                    facebook: { link: this.state.facebook },
-                    instagram: { link: this.state.instagram },
-                    twitter: { link: this.state.twitter },
-                    linkedIn: { link: this.state.linkedIn }
+                    twitter: { handle: this.state.twitter },
+                    tumblr: { handle: this.state.tumblr },
+                    pinterest: { handle: this.state.pinterest }
                 }
             }
 
@@ -190,29 +188,9 @@ class AddNewContact extends Component {
                                 </TextArea>
                             </div>
                         </div>
+                        
                         <div className="socialsSection">
                             <h2 style={contactStyle.headers}>Socials</h2>
-                            <div className="formField">
-                                <label htmlFor="facebook">Facebook: </label>
-                                <Input
-                                    type="text"
-                                    name="facebook"
-                                    id="facebook"
-                                    value={this.state.facebook}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-
-                            <div className="formField">
-                                <label htmlFor="instagram">Instagram: </label>
-                                <Input
-                                    type="text"
-                                    name="instagram"
-                                    id="instagram"
-                                    value={this.state.instagram}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
 
                             <div className="formField">
                                 <label htmlFor="twitter">Twitter: </label>
@@ -226,12 +204,23 @@ class AddNewContact extends Component {
                             </div>
 
                             <div className="formField">
-                                <label htmlFor="linkedIn">LinkedIn: </label>
+                                <label htmlFor="tumblr">Tumblr: </label>
                                 <Input
                                     type="text"
-                                    name="linkedIn"
-                                    id="linkedIn"
-                                    value={this.state.linkedIn}
+                                    name="tumblr"
+                                    id="tumblr"
+                                    value={this.state.tumblr}
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+
+                            <div className="formField">
+                                <label htmlFor="pinterest">Pinterest: </label>
+                                <Input
+                                    type="text"
+                                    name="pinterest"
+                                    id="pinterest"
+                                    value={this.state.pinterest}
                                     onChange={this.handleChange}
                                 />
                             </div>
