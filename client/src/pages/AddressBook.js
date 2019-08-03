@@ -120,20 +120,17 @@ class AddressBook extends Component {
     }
 
     renderContactView = () => { // switches view of contact components or single contact view
-        let { viewId } = this.state;
+        // let { viewId } = this.state;
 
         switch (this.state.mode) {
             case "All Contacts":
                 return this.allView();
-                break;
             case "One Contact":
                 // return console.log(this.state.viewId);
                 return this.oneView(this.state.viewId);
-                break;
             default:
                 return <h1>Error: Attempted state mode - {this.state.mode}</h1>
         }
-
     }
 
     allView = () => { // builds list of all contacts
@@ -186,7 +183,7 @@ class AddressBook extends Component {
                         <Row>
                             <Col size="sm-12 md-2">
                                 <div className="text-center">
-                                    <a className="waves-effect waves-light btn-small red" onClick={this.addContact}><span style={addressStyle.button}>New Contact</span></a>
+                                    <button className="waves-effect waves-light btn-small red" onClick={this.addContact}><span style={addressStyle.button}>New Contact</span></button>
                                 </div>
                                 <br></br>
                                 <form className="filtersContainer">

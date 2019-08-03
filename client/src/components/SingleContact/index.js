@@ -32,9 +32,8 @@ class SingleContact extends Component {
         
     }
 
-
     render() {
-        let { payload, socialType, swapView } = this.props;
+        let { payload, socialType } = this.props;
 
         return (
             <div className="SingleContact">

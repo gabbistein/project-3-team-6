@@ -13,9 +13,4 @@ router
   .put(userController.addContact)
   .delete(userController.remove)
 
-// Matches with "/api/users/:id/:social"
-router
-  .route("/:id/:contactId/:social")
-  .get(userController.findSocial)
-
 module.exports = router;

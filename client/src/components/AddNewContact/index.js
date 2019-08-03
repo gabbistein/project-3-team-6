@@ -226,7 +226,7 @@ class AddNewContact extends Component {
                             </div>
                         </div>
                         <p className="errorMsg">{this.state.error}</p>
-                        <a className="waves-effect waves-light btn-large red" onClick={this.handleSubmit}><span style={contactStyle.button}>New Contact</span></a>
+                        <button className="waves-effect waves-light btn-large red" onClick={this.handleSubmit}><span style={contactStyle.button}>New Contact</span></button>
                     </form>
                 </Jumbotron>
             </div>

@@ -10,24 +10,10 @@ module.exports = {
   },
   findById: function (req, res) {
     db.User
-      .findById(req.params.id)
-      .catch(err => res.status(422).json(err));
-  },
-  findSocial: function (req, res) {
-    // find userId
-    // find contactId
-    // find social handle
-
-    db.User.findOne({
-      googleId: req.params.id,
-      contacts: { $elemMatch: { _id: req.params.contactId } } /* LEFT OFF HERE!! */
-    }).then((currentUser) => {
-      console.log(currentUser) /* Array of objects */
-
-      let socialHandle = currentUser.socialMedia
-
-      console.log(socialHandle)
-    })
+      .findOne({googleId: req.params.id}).then((currentUser) => {
+        console.log(currentUser)
+      })
+      .catch(err => console.log(err));
   },
   create: function (req, res) {
     db.User.findOne({ googleId: req.body.googleId }).then((currentUser) => {

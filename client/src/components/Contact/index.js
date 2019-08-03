@@ -24,7 +24,7 @@ class Contact extends Component {
     let { payload } = this.props; // This will need to be customized once
 
     console.log(`User ${payload.id}: ${payload.firstName} ${payload.lastName}`);
-    let { target } = event;
+    // let { target } = event;
 
     this.props.deleteContact(payload.id);
   }
@@ -39,7 +39,7 @@ class Contact extends Component {
             <img src="https://via.placeholder.com/128" alt="Contact" />
           </div>
           <div className="col-sm-2 align-self-center">
-            <button className="btn" type="button" onClick={console.log("name click", payload.id)} data-userid={payload.id}><p>{payload.firstName}</p></button>
+            <button className="btn" type="button" onClick={this.socialButtonClick} data-userid={payload.id}><p>{payload.firstName}</p></button>
           </div>
           <div className="col-sm-2 align-self-center">
             <button className="btn" type="button" onClick={this.removeButtonClick} data-userid={payload.id}><p>Remove</p></button>
