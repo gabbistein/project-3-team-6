@@ -5,7 +5,6 @@ import AddressBook from "./pages/AddressBook";
 import NewContactForm from "./pages/NewContactForm";
 import ContactDetail from "./pages/ContactDetail";
 import NoMatch from "./pages/NoMatch";
-// import Facebook from "./components/FacebookLogin/login";
 import Footer from "./components/Footer/footer"
 import Cookies from "js-cookie"
 import './App.css'
@@ -27,15 +26,16 @@ class App extends Component {
     return (
       <Router>
         <div className="backgroundImg">
-          <div className="main-content">
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route exact path="/addressbook" component={AddressBook} />
-              <Route exact path="/newcontact" component={NewContactForm} />
-              <Route exact path="/contactdetail" component={ContactDetail} />
-              <Route component={NoMatch} />
-            </Switch>
-            {/* <Facebook /> */}
+          <div className="Site">
+            <div className="Site-content">
+              <Switch>
+                <Route exact path="/" component={Login} />
+                <Route exact path="/addressbook" component={AddressBook} />
+                <Route exact path="/newcontact" component={NewContactForm} />
+                <Route exact path="/contactdetail" component={ContactDetail} />
+                <Route component={NoMatch} />
+              </Switch>
+            </div>
           </div>
           <Footer />
         </div>

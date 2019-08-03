@@ -14,7 +14,6 @@ router.get("/auth/tumblr/callback",
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect("/");
-    console.log("this is for tumblr");
     
   });
 

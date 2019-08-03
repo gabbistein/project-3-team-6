@@ -1,6 +1,5 @@
 import React from "react";
 import Logout from "../Logout"
-// import Facebook from "../FacebookLogin/login";
 
 let navStyles = {
   logo: {
