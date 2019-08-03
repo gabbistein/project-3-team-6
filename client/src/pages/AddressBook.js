@@ -44,7 +44,7 @@ class AddressBook extends Component {
 
         this.state = {
             loggedIn: true,
-            contacts: fakeUsers, //TODO: will need to pull from API
+            contacts: [], //TODO: will need to pull from API
             filteredContacts: [], // Once filtering is decided.
             mode: "All Contacts", // or "One Contact",
             viewId: null,
@@ -77,7 +77,7 @@ class AddressBook extends Component {
         API.getUser(Cookies.get("google_id"))
             .then(res => {
                 console.log(res.data.contacts)
-                this.setState({contacts: res.data.contacts})
+                this.setState({ contacts: res.data.contacts })
             })
             .catch(err => console.log(err));
     };
@@ -134,6 +134,12 @@ class AddressBook extends Component {
 
     allView = () => { // builds list of all contacts
         let { contacts } = this.state;
+
+        if (contacts.length < 1 || contacts == undefined) {
+            return (
+                <h3>You have no contacts yet! Please add a contact!</h3>
+            )
+        }
 
         let list = [];
 
