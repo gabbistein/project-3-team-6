@@ -6,13 +6,13 @@ module.exports = {
     db.User
       .find(req.query)
       .sort({ date: -1 })
-      .catch(err => res.status(422).json(err));
+      .then(dbModel => res.json(dbModel))
+      .catch(err => console.log(err));
   },
-  findById: function (req, res) {
+  findUser: function (req, res) {
     db.User
-      .findOne({googleId: req.params.id}).then((currentUser) => {
-        console.log(currentUser)
-      })
+      .findOne({googleId: req.params.id})
+      .then(dbModel => res.json(dbModel))
       .catch(err => console.log(err));
   },
   create: function (req, res) {

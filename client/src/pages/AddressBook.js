@@ -3,7 +3,9 @@ import { Col, Row } from "../components/Grid";
 import Contact from "../components/Contact";
 import SingleContact from "../components/SingleContact";
 import Nav from "../components/Nav";
-import AddressBookJumbo from "../components/AddressBookJumbo"
+import AddressBookJumbo from "../components/AddressBookJumbo";
+import API from "../utils/API";
+import Cookies from "js-cookie";
 
 let addressStyle = {
     button: {
@@ -17,10 +19,10 @@ let addressStyle = {
     }
 }
 
-var fakeUsers=[];
+var fakeUsers = [];
 function fakeUser(id) {
-    return{
-        id:id,
+    return {
+        id: id,
         firstName: "Vish",
         lastName: "Diwan",
         email: "vishdiwan@gmail.com",
@@ -56,32 +58,29 @@ class AddressBook extends Component {
                 "Professors": true,
             },
         };
-
-    }
-
-    componentWillMount() {
     }
 
     componentDidMount() {
+        this.loadContacts();
         console.log("address book mounted", this.state.contacts);
-        // this.loadContacts();
     };
 
     deleteContact = (id) => { //TODO need to delete from database
-        let {contacts} = this.state;
-        contacts.splice(id,1);
-        this.setState ({
-            contacts, 
+        let { contacts } = this.state;
+        contacts.splice(id, 1);
+        this.setState({
+            contacts,
         })
     }
 
-    // loadContacts = () => {
-    //     API.getContacts()
-    //         .then(res =>
-    //             this.setState({})
-    //         )
-    //         .catch(err => console.log(err));
-    // };
+    loadContacts = () => {
+        API.getUser(Cookies.get("google_id"))
+            .then(res => {
+                console.log(res.data.contacts)
+                this.setState({contacts: res.data.contacts})
+            })
+            .catch(err => console.log(err));
+    };
 
     filterChange = (event) => { // When a checkbox in the filter is checked, it updates in state
         console.log('Filter Change', event.target.id, event.target.checked);
@@ -139,7 +138,7 @@ class AddressBook extends Component {
         let list = [];
 
         for (let contact of contacts) {
-            list.push(<Contact key={contact.id} payload={contact} swapView={this.swapView} deleteContact={this.deleteContact}/>);
+            list.push(<Contact key={contact._id} payload={contact} swapView={this.swapView} deleteContact={this.deleteContact} />);
         }
 
         return list;
@@ -148,7 +147,7 @@ class AddressBook extends Component {
     oneView = (userid) => { // Renders a single contact view
         console.log("One View", userid)
         let { contacts, socialType } = this.state;
-        
+
         let thisContact = contacts.find(contact => contact.id === userid);
 
         return <SingleContact payload={thisContact} socialType={socialType} swapView={this.swapView} />

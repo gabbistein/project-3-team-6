@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import tumblr from "tumblr.js"
+import tumblr from "tumblr.js";
+import API from "../../utils/API";
+import Cookies from "js-cookie";
 
 // console.log(API_KEY);
 
@@ -11,6 +13,7 @@ class SingleContact extends Component {
         this.state = { // This data is perhaps with props
             userid: 0,
             name: "davis112"
+
         };
     }
     handleSwap = (event) => {
@@ -28,8 +31,15 @@ class SingleContact extends Component {
     }
 
     componentDidMount() {
+        console.log(`User id: ${Cookies.get("google_id")}`)
+        console.log(`Contact id: ${this.props.payload.id}`)
+        API.getUser(Cookies.get("google_id")).then(user => { /* TODO: get this working */
+            let contacts = user.contacts
+
+            console.log(`contacts: ${contacts}`)
+        })
+
         this.queryTumblr();
-        
     }
 
     render() {

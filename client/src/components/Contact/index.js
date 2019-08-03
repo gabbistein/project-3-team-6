@@ -31,7 +31,7 @@ class Contact extends Component {
 
   render() {
     let { payload } = this.props; // This will need to be customized once
-    console.log(payload);
+    // console.log(payload);
     return (
       <div className="container-fluid">
         <div className="Contact row">
