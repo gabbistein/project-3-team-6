@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Col, Row, Container } from "../Grid";
 
 class Contact extends Component {
   constructor(props) {

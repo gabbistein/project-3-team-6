@@ -5,7 +5,6 @@ import AddressBook from "./pages/AddressBook";
 import NewContactForm from "./pages/NewContactForm";
 import ContactDetail from "./pages/ContactDetail";
 import NoMatch from "./pages/NoMatch";
-// import Facebook from "./components/FacebookLogin/login";
 import Footer from "./components/Footer/footer"
 import Cookies from "js-cookie"
 import './App.css'

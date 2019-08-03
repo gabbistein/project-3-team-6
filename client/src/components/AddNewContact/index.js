@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, TextArea, FormBtn } from '../Form';
+import { Input, TextArea } from '../Form';
 import validator from 'validator';
 import Jumbotron from '../Jumbotron';
 import API from "../../utils/API";
