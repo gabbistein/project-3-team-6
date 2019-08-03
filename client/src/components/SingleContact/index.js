@@ -36,11 +36,11 @@ class SingleContact extends Component {
             tokenSecret: tokenSecret
         });
         //this is querying the tumblr blog method, pulls back an object of basic info
-        client.blogPosts(`${userBlogName}`, (err, response) => {
-            this.setState({ 
-                userPosts: response.posts,
-            })
-        })
+        // client.blogPosts(`${userBlogName}`, (err, response) => {
+        //     this.setState({ 
+        //         userPosts: response.posts,
+        //     })
+        // })
     }
 
     componentDidMount() {
