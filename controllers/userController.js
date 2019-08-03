@@ -20,7 +20,7 @@ module.exports = {
 
     db.User.findOne({
       googleId: req.params.id,
-      contacts: { $elemMatch: { _id: req.params.contactId } }
+      contacts: { $elemMatch: { _id: req.params.contactId } } /* LEFT OFF HERE!! */
     }).then((currentUser) => {
       console.log(currentUser) /* Array of objects */
 
