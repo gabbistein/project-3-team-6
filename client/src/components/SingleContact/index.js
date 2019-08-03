@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import tumblr from "tumblr.js";
 import API from "../../utils/API";
 import Cookies from "js-cookie";
-
+import dotenv from "dotenv"
+import { log } from "util";
+dotenv.config()
 // console.log(API_KEY);
 
 
@@ -11,22 +13,33 @@ class SingleContact extends Component {
         super(props);
 
         this.state = { // This data is perhaps with props
-            userid: 0,
-            name: "davis112"
-
+            name: "smbc-comics",
+            userName: "",
+            url: "",
+            userPosts: ""
         };
     }
     handleSwap = (event) => {
         this.props.swapView("All Contacts", null, null);
     }
-    
-    queryTumblr = () => {
+
+    queryTumblr() {
         let userBlogName = this.state.name;
-        const API_KEY = process.env.REACT_APP_API_KEY;
-        var client = tumblr.createClient({ consumer_key: API_KEY });
+        var consumerKey = process.env.REACT_APP_API_KEY;
+        var consumerSecret = process.env.REACT_APP_API_KEY;
+        var token = process.env.REACT_APP_TOKEN;
+        var tokenSecret = process.env.REACT_APP_TOKEN_SECRET;
+        var client = tumblr.createClient({ 
+            consumer_key: consumerKey,
+            consumer_secret: consumerSecret,
+            token: token,
+            tokenSecret: tokenSecret
+        });
         //this is querying the tumblr blog method, pulls back an object of basic info
-        client.blogInfo(`${userBlogName}.tumblr.com`, function (err, data) {
-            console.log(data);
+        client.blogPosts(`${userBlogName}`, (err, response) => {
+            this.setState({ 
+                userPosts: response.posts,
+            })
         })
     }
 
@@ -47,9 +60,19 @@ class SingleContact extends Component {
 
         return (
             <div className="SingleContact">
-                <h1>{payload.firstName}</h1>
+                <h1>{`${payload.firstName} ${payload.lastName}`}</h1>
                 <p>{JSON.stringify(payload)}</p>
                 <p>Showing {socialType}</p>
+                <div>
+                    <ul>
+                        {
+                            Object.keys(this.state.userPosts).map((key, i) => (
+                            <p key={i}>Hello, {this.state.userPosts.image_permalink}!</p>
+                            //this is only populating the "hello", i need a second set of eyes to find out why image_permalink isn't bringing back a value
+                        ))
+                        }
+                    </ul>
+                </div>
                 <button onClick={this.handleSwap}>Back</button>
             </div>
         )
