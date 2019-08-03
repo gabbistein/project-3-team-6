@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import tumblr from "tumblr.js"
+import tumblr from "tumblr.js";
+import API from "../../utils/API";
+import Cookies from "js-cookie";
 import dotenv from "dotenv"
 import { log } from "util";
 dotenv.config()
+// console.log(API_KEY);
 
 
 class SingleContact extends Component {
@@ -33,24 +36,31 @@ class SingleContact extends Component {
             tokenSecret: tokenSecret
         });
         //this is querying the tumblr blog method, pulls back an object of basic info
-        client.blogPosts(`${userBlogName}`, (err, response) => {
-            this.setState({ 
-                userPosts: response.posts,
-            })
-        })
+        // client.blogPosts(`${userBlogName}`, (err, response) => {
+        //     this.setState({ 
+        //         userPosts: response.posts,
+        //     })
+        // })
     }
 
     componentDidMount() {
+        console.log(`User id: ${Cookies.get("google_id")}`)
+        console.log(`Contact id: ${this.props.payload.id}`)
+        API.getUser(Cookies.get("google_id")).then(user => { /* TODO: get this working */
+            let contacts = user.contacts
+
+            console.log(`contacts: ${contacts}`)
+        })
+
         this.queryTumblr();
     }
 
-
     render() {
-        let { payload, socialType, swapView } = this.props;
+        let { payload, socialType } = this.props;
 
         return (
             <div className="SingleContact">
-                <h1>{payload.firstName}</h1>
+                <h1>{`${payload.firstName} ${payload.lastName}`}</h1>
                 <p>{JSON.stringify(payload)}</p>
                 <p>Showing {socialType}</p>
                 <div>

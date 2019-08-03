@@ -3,7 +3,9 @@ import { Col, Row } from "../components/Grid";
 import Contact from "../components/Contact";
 import SingleContact from "../components/SingleContact";
 import Nav from "../components/Nav";
-import AddressBookJumbo from "../components/AddressBookJumbo"
+import AddressBookJumbo from "../components/AddressBookJumbo";
+import API from "../utils/API";
+import Cookies from "js-cookie";
 
 let addressStyle = {
     button: {
@@ -17,10 +19,10 @@ let addressStyle = {
     }
 }
 
-var fakeUsers=[];
+var fakeUsers = [];
 function fakeUser(id) {
-    return{
-        id:id,
+    return {
+        id: id,
         firstName: "Vish",
         lastName: "Diwan",
         email: "vishdiwan@gmail.com",
@@ -42,7 +44,7 @@ class AddressBook extends Component {
 
         this.state = {
             loggedIn: true,
-            contacts: fakeUsers, //TODO: will need to pull from API
+            contacts: [], //TODO: will need to pull from API
             filteredContacts: [], // Once filtering is decided.
             mode: "All Contacts", // or "One Contact",
             viewId: null,
@@ -56,32 +58,29 @@ class AddressBook extends Component {
                 "Professors": true,
             },
         };
-
-    }
-
-    componentWillMount() {
     }
 
     componentDidMount() {
+        this.loadContacts();
         console.log("address book mounted", this.state.contacts);
-        // this.loadContacts();
     };
 
     deleteContact = (id) => { //TODO need to delete from database
-        let {contacts} = this.state;
-        contacts.splice(id,1);
-        this.setState ({
-            contacts, 
+        let { contacts } = this.state;
+        contacts.splice(id, 1);
+        this.setState({
+            contacts,
         })
     }
 
-    // loadContacts = () => {
-    //     API.getContacts()
-    //         .then(res =>
-    //             this.setState({})
-    //         )
-    //         .catch(err => console.log(err));
-    // };
+    loadContacts = () => {
+        API.getUser(Cookies.get("google_id"))
+            .then(res => {
+                console.log(res.data.contacts)
+                this.setState({ contacts: res.data.contacts })
+            })
+            .catch(err => console.log(err));
+    };
 
     filterChange = (event) => { // When a checkbox in the filter is checked, it updates in state
         console.log('Filter Change', event.target.id, event.target.checked);
@@ -120,29 +119,32 @@ class AddressBook extends Component {
     }
 
     renderContactView = () => { // switches view of contact components or single contact view
-        let { viewId } = this.state;
+        // let { viewId } = this.state;
 
         switch (this.state.mode) {
             case "All Contacts":
                 return this.allView();
-                break;
             case "One Contact":
                 // return console.log(this.state.viewId);
                 return this.oneView(this.state.viewId);
-                break;
             default:
                 return <h1>Error: Attempted state mode - {this.state.mode}</h1>
         }
-
     }
 
     allView = () => { // builds list of all contacts
         let { contacts } = this.state;
 
+        if (contacts.length < 1 || contacts == undefined) {
+            return (
+                <h3>You have no contacts yet! Please add a contact!</h3>
+            )
+        }
+
         let list = [];
 
         for (let contact of contacts) {
-            list.push(<Contact key={contact.id} payload={contact} swapView={this.swapView} deleteContact={this.deleteContact}/>);
+            list.push(<Contact key={contact._id} payload={contact} swapView={this.swapView} deleteContact={this.deleteContact} />);
         }
 
         return list;
@@ -151,7 +153,7 @@ class AddressBook extends Component {
     oneView = (userid) => { // Renders a single contact view
         console.log("One View", userid)
         let { contacts, socialType } = this.state;
-        
+
         let thisContact = contacts.find(contact => contact.id === userid);
 
         return <SingleContact payload={thisContact} socialType={socialType} swapView={this.swapView} />
@@ -186,7 +188,7 @@ class AddressBook extends Component {
                         <Row>
                             <Col size="sm-12 md-2">
                                 <div className="text-center">
-                                    <a className="waves-effect waves-light btn-small red" onClick={this.addContact}><span style={addressStyle.button}>New Contact</span></a>
+                                    <button className="waves-effect waves-light btn-small red" onClick={this.addContact}><span style={addressStyle.button}>New Contact</span></button>
                                 </div>
                                 <br></br>
                                 <form className="filtersContainer">
