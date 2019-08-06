@@ -67,9 +67,13 @@ class AddressBook extends Component {
 
     deleteContact = (id) => { //TODO need to delete from database
         let { contacts } = this.state;
-        contacts.splice(id, 1);
+       
+        let newContacts = contacts.filter((contact) => {
+            return contact._id !== id
+        })
+
         this.setState({
-            contacts,
+            contacts: newContacts,
         })
     }
 

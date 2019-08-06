@@ -57,11 +57,6 @@ class SingleContact extends Component {
 
     render() {
         let { payload, socialType } = this.props;
-        console.log("Single contact props:")
-        console.log(this.props)
-        
-        console.log("Single contact payload:")
-        console.log(payload)
 
         return (
             <div className="SingleContact">
