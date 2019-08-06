@@ -44,7 +44,7 @@ class AddressBook extends Component {
 
         this.state = {
             loggedIn: true,
-            contacts: [], //TODO: will need to pull from API
+            contacts: [], 
             filteredContacts: [], // Once filtering is decided.
             mode: "All Contacts", // or "One Contact",
             viewId: null,
@@ -66,17 +66,22 @@ class AddressBook extends Component {
     };
 
     deleteContact = (id) => { //TODO need to delete from database
+        API.deleteUser(Cookies.get("google_id"), id);
+        
         let { contacts } = this.state;
-        contacts.splice(id, 1);
+       
+        let newContacts = contacts.filter((contact) => {
+            return contact._id !== id
+        })
+
         this.setState({
-            contacts,
+            contacts: newContacts,
         })
     }
 
     loadContacts = () => {
         API.getUser(Cookies.get("google_id"))
             .then(res => {
-                console.log(res.data.contacts)
                 this.setState({ contacts: res.data.contacts })
             })
             .catch(err => console.log(err));
@@ -135,7 +140,7 @@ class AddressBook extends Component {
     allView = () => { // builds list of all contacts
         let { contacts } = this.state;
 
-        if (contacts.length < 1 || contacts == undefined) {
+        if (contacts.length < 1 || contacts === undefined) {
             return (
                 <h3>You have no contacts yet! Please add a contact!</h3>
             )
@@ -154,13 +159,12 @@ class AddressBook extends Component {
         console.log("One View", userid)
         let { contacts, socialType } = this.state;
 
-        let thisContact = contacts.find(contact => contact.id === userid);
+        let thisContact = contacts.find(contact => contact._id === userid);
 
         return <SingleContact payload={thisContact} socialType={socialType} swapView={this.swapView} />
     }
 
     swapView = (mode, viewId, socialType) => { // Action to swap view state
-        console.log("Swapp!")
         this.setState({
             mode,
             viewId,

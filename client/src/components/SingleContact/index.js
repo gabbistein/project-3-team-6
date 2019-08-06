@@ -3,10 +3,7 @@ import tumblr from "tumblr.js";
 import API from "../../utils/API";
 import Cookies from "js-cookie";
 import dotenv from "dotenv"
-import { log } from "util";
 dotenv.config()
-// console.log(API_KEY);
-
 
 class SingleContact extends Component {
     constructor(props) {
@@ -19,6 +16,7 @@ class SingleContact extends Component {
             userPosts: ""
         };
     }
+
     handleSwap = (event) => {
         this.props.swapView("All Contacts", null, null);
     }
@@ -35,7 +33,8 @@ class SingleContact extends Component {
             token: token,
             tokenSecret: tokenSecret
         });
-        //this is querying the tumblr blog method, pulls back an object of basic info
+
+        // //this is querying the tumblr blog method, pulls back an object of basic info
         // client.blogPosts(`${userBlogName}`, (err, response) => {
         //     this.setState({ 
         //         userPosts: response.posts,
@@ -45,11 +44,12 @@ class SingleContact extends Component {
 
     componentDidMount() {
         console.log(`User id: ${Cookies.get("google_id")}`)
-        console.log(`Contact id: ${this.props.payload.id}`)
-        API.getUser(Cookies.get("google_id")).then(user => { /* TODO: get this working */
-            let contacts = user.contacts
+        console.log(`Contact id: ${this.props.payload._id}`)
+        API.getUser(Cookies.get("google_id")).then(user => { /* TODO: currently only grabs first person on contact list */
+            let contacts = user.data.contacts
 
-            console.log(`contacts: ${contacts}`)
+            console.log("Contacts: ")
+            console.log(contacts)
         })
 
         this.queryTumblr();
