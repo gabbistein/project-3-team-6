@@ -33,6 +33,7 @@ module.exports = {
     // .catch(err => res.status(422).json(err));
   },
   addContact: function (req, res) {
+    console.log(req.body)
     db.User
       .findOneAndUpdate(
         { googleId: req.params.id },

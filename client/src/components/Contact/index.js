@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import API from "../../utils/API";
+import Cookies from "js-cookie"
 
 class Contact extends Component {
   constructor(props) {
@@ -29,7 +31,21 @@ class Contact extends Component {
     this.props.deleteContact(payload._id);
   }
 
+  // retreiveContactPhoto = (contactId) => {
+  //   API.getUser(Cookies.get("google_id")).then(res => {
+  //     console.log(res.data.contacts)
+      
+  //     let contactPhotoUrl = res.data.contacts.filter(contact => {
+  //       if( contact._id === contactId){
+  //         return contact.photos[0]
+  //       }
+  //     })
+  //   })
+  // }
+
+
   render() {
+    // this.retreiveContactPhoto()
     let { payload } = this.props; // This will need to be customized once
 
     return (
