@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -8,7 +7,18 @@ const app = express();
 const db = mongoose.connection;
 const cookieSession = require("cookie-session");
 const passport = require("passport");
+const request = require("request")
+require('dotenv').config()
 
+app.get("/api/tumblr"), (req, res) => {
+    request("http://api.tumblr.com/v2/blog/catasters.tumblr.com/posts/photo?api_key=" + process.env.TUMBLR_API_KEY, { json: true }, (err, response, body) => {
+    if (err) {
+      throw err;
+    }
+    
+    res.json(body);
+  })
+}
 
 const PORT = process.env.PORT || 3001;
 
@@ -21,7 +31,7 @@ app.use(bodyParser.json());
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(express.static("client/"));
 }
 // Add routes, both API and view
 app.use(routes);

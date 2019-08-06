@@ -44,7 +44,7 @@ class AddressBook extends Component {
 
         this.state = {
             loggedIn: true,
-            contacts: [], //TODO: will need to pull from API
+            contacts: fakeUsers, //TODO: will need to pull from API
             filteredContacts: [], // Once filtering is decided.
             mode: "All Contacts", // or "One Contact",
             viewId: null,

@@ -4,6 +4,7 @@ import API from "../../utils/API";
 import Cookies from "js-cookie";
 import dotenv from "dotenv"
 import { log } from "util";
+import axios from "axios";
 dotenv.config()
 // console.log(API_KEY);
 
@@ -13,7 +14,7 @@ class SingleContact extends Component {
         super(props);
 
         this.state = { // This data is perhaps with props
-            name: "smbc-comics",
+            name: "pitchersandpoets",
             userName: "",
             url: "",
             userPosts: ""
@@ -24,24 +25,13 @@ class SingleContact extends Component {
     }
 
     queryTumblr() {
-        let userBlogName = this.state.name;
-        var consumerKey = process.env.REACT_APP_API_KEY;
-        var consumerSecret = process.env.REACT_APP_API_KEY;
-        var token = process.env.REACT_APP_TOKEN;
-        var tokenSecret = process.env.REACT_APP_TOKEN_SECRET;
-        var client = tumblr.createClient({ 
-            consumer_key: consumerKey,
-            consumer_secret: consumerSecret,
-            token: token,
-            tokenSecret: tokenSecret
-        });
-        //this is querying the tumblr blog method, pulls back an object of basic info
-        // client.blogPosts(`${userBlogName}`, (err, response) => {
-        //     this.setState({ 
-        //         userPosts: response.posts,
-        //     })
-        // })
+        axios.get("/api/tumblr")
+        .then(response => {
+            console.log(response);
+        })
     }
+
+    
 
     componentDidMount() {
         console.log(`User id: ${Cookies.get("google_id")}`)
@@ -66,11 +56,9 @@ class SingleContact extends Component {
                 <div>
                     <ul>
                         {
-                            Object.keys(this.state.userPosts).map((key, i) => (
-                            <p key={i}>Hello, {this.state.userPosts.image_permalink}!</p>
-                            //this is only populating the "hello", i need a second set of eyes to find out why image_permalink isn't bringing back a value
-                        ))
+
                         }
+                        {/* {console.log(this.state.userPosts)} */}
                     </ul>
                 </div>
                 <button onClick={this.handleSwap}>Back</button>
