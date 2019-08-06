@@ -34,7 +34,7 @@ class Contact extends Component {
   // retreiveContactPhoto = (contactId) => {
   //   API.getUser(Cookies.get("google_id")).then(res => {
   //     console.log(res.data.contacts)
-      
+
   //     let contactPhotoUrl = res.data.contacts.filter(contact => {
   //       if( contact._id === contactId){
   //         return contact.photos[0]
@@ -47,12 +47,16 @@ class Contact extends Component {
   render() {
     // this.retreiveContactPhoto()
     let { payload } = this.props; // This will need to be customized once
+    console.log(payload.photos)
 
     return (
       <div className="container-fluid">
         <div className="Contact row">
           <div className="col-sm-2 align-self-center">
-            <img src="https://via.placeholder.com/128" alt="Contact" />
+            {(payload.photos.length < 1) ?
+              <img src="https://via.placeholder.com/128" alt="Contact" /> :
+              <img src={payload.photos[0]} alt="Contact" />
+            }
           </div>
           <div className="col-sm-2 align-self-center">
             <button className="btn" type="button" onClick={this.socialButtonClick} data-userid={payload._id}><p>{payload.firstName}</p></button>
