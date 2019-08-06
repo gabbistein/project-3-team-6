@@ -11,7 +11,7 @@ module.exports = {
   },
   findUser: function (req, res) {
     db.User
-      .findOne({googleId: req.params.id})
+      .findOne({ googleId: req.params.id })
       .then(dbModel => res.json(dbModel))
       .catch(err => console.log(err));
   },
@@ -42,9 +42,17 @@ module.exports = {
   },
   // remove contact from list
   remove: function (req, res) {
+    // Need to find user id, then contacts id
+
+    console.log(req.params.userId)
+    console.log(req.params.contactId)
+
     db.User
-      .updateOne({ google: { googleId: req.params.id } }, { $pull: { contacts: { _id: req.params.id } } }) /* need to index each User contact in model and replace contactId with index */
-      .then(dbModel => dbModel.remove())
-      .catch(err => res.status(422).json(err));
+      .findOneAndUpdate(
+        { googleId: req.params.userId },
+        { $pull: { contacts: { _id: req.params.contactId } } },
+        { new: true }
+      )
+      .catch(err => console.log(err));
   }
 };

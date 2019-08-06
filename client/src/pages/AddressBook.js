@@ -66,6 +66,8 @@ class AddressBook extends Component {
     };
 
     deleteContact = (id) => { //TODO need to delete from database
+        API.deleteUser(Cookies.get("google_id"), id);
+        
         let { contacts } = this.state;
        
         let newContacts = contacts.filter((contact) => {
@@ -80,7 +82,6 @@ class AddressBook extends Component {
     loadContacts = () => {
         API.getUser(Cookies.get("google_id"))
             .then(res => {
-                console.log(res.data.contacts)
                 this.setState({ contacts: res.data.contacts })
             })
             .catch(err => console.log(err));
