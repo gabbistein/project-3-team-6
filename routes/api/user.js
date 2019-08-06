@@ -11,6 +11,9 @@ router
   .route("/:id")
   .get(userController.findUser)
   .put(userController.addContact)
+  
+router
+  .route("/:userId/:contactId")
   .delete(userController.remove)
 
 module.exports = router;

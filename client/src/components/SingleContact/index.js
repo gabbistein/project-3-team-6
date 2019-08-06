@@ -6,8 +6,6 @@ import dotenv from "dotenv"
 import { log } from "util";
 import axios from "axios";
 dotenv.config()
-// console.log(API_KEY);
-
 
 class SingleContact extends Component {
     constructor(props) {
@@ -20,6 +18,7 @@ class SingleContact extends Component {
             userPosts: ""
         };
     }
+
     handleSwap = (event) => {
         this.props.swapView("All Contacts", null, null);
     }
@@ -35,11 +34,12 @@ class SingleContact extends Component {
 
     componentDidMount() {
         console.log(`User id: ${Cookies.get("google_id")}`)
-        console.log(`Contact id: ${this.props.payload.id}`)
-        API.getUser(Cookies.get("google_id")).then(user => { /* TODO: get this working */
-            let contacts = user.contacts
+        console.log(`Contact id: ${this.props.payload._id}`)
+        API.getUser(Cookies.get("google_id")).then(user => { /* TODO: currently only grabs first person on contact list */
+            let contacts = user.data.contacts
 
-            console.log(`contacts: ${contacts}`)
+            console.log("Contacts: ")
+            console.log(contacts)
         })
 
         this.queryTumblr();
