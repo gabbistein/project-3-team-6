@@ -37,7 +37,7 @@ class AddNewContact extends Component {
             tumblr: "",                
             pinterest: "",
             notes: "",
-            error: "",
+            error: ""
         }
     }
 
@@ -102,8 +102,19 @@ class AddNewContact extends Component {
             console.log(JSON.stringify(newContact))
             API.addContact(`/${Cookies.get("google_id")}`, newContact)
 
+            alert(`${newContact.firstName} ${newContact.lastName} has been added to your contacts!`)
+
             this.setState({
                 error: "", // Clear error message
+                firstName: "",
+                lastName: "",
+                email: "",
+                birthday: "",
+                phoneNumber: "",
+                twitter: "",
+                tumblr: "",                
+                pinterest: "",
+                notes: ""
             })
         } else {
             this.setState({

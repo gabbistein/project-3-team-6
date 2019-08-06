@@ -135,7 +135,7 @@ class AddressBook extends Component {
     allView = () => { // builds list of all contacts
         let { contacts } = this.state;
 
-        if (contacts.length < 1 || contacts == undefined) {
+        if (contacts.length < 1 || contacts === undefined) {
             return (
                 <h3>You have no contacts yet! Please add a contact!</h3>
             )
@@ -154,13 +154,12 @@ class AddressBook extends Component {
         console.log("One View", userid)
         let { contacts, socialType } = this.state;
 
-        let thisContact = contacts.find(contact => contact.id === userid);
+        let thisContact = contacts.find(contact => contact._id === userid);
 
         return <SingleContact payload={thisContact} socialType={socialType} swapView={this.swapView} />
     }
 
     swapView = (mode, viewId, socialType) => { // Action to swap view state
-        console.log("Swapp!")
         this.setState({
             mode,
             viewId,
