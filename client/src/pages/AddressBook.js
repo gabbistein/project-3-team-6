@@ -192,7 +192,7 @@ class AddressBook extends Component {
                         <Row>
                             <Col size="sm-12 md-2">
                                 <div className="text-center">
-                                    <button className="waves-effect waves-light btn-small red" onClick={this.addContact}><span style={addressStyle.button}>New Contact</span></button>
+                                    <a className="waves-effect waves-light btn-small red" onClick={this.addContact}><span style={addressStyle.button}>New Contact</span></a>
                                 </div>
                                 <br></br>
                                 <form className="filtersContainer">
