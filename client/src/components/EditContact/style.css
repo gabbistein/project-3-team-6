@@ -1,0 +1,11 @@
+.errorMsg {
+    color: red;
+}
+
+.errorBg {
+    background-color: pink !important;
+}
+
+.newContactContainer {
+    margin-top: 20px;
+}
