@@ -14,15 +14,16 @@
 }
 
 .Site {
-  display: flex;
-  flex-direction: column;
-  min-height: 92vh;
+  /* display: flex;
+  flex-direction: column; */
+  min-height: 100vh;
 }
 
 .Site-content {
-  flex: 1 0 auto;
-  padding: var(--space) var(--space) 0;
+  /* flex: 1 0 auto;
+  padding: var(--space) var(--space) 0; */
   width: 100%;
+  margin: 0 auto -82px;
 }
 /* 
 .Site-content:after {
