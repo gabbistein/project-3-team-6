@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import Cookies from "js-cookie";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 dotenv.config()
 
 class SingleContact extends Component {
@@ -29,8 +29,6 @@ class SingleContact extends Component {
             console.log("Contacts: ")
             console.log(contacts)
         })
-
-        this.queryTumblr();
     }
 
     render() {

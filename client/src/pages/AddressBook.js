@@ -65,7 +65,7 @@ class AddressBook extends Component {
         console.log("address book mounted", this.state.contacts);
     };
 
-    deleteContact = (id) => { //TODO need to delete from database
+    deleteContact = (id) => {
         API.deleteUser(Cookies.get("google_id"), id);
 
         let { contacts } = this.state;

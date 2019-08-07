@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Input, TextArea } from '../Form';
+import { Redirect } from "react-router-dom";
 import validator from 'validator';
+import { withRouter } from 'react-router';
 import Jumbotron from '../Jumbotron';
 import API from "../../utils/API";
 import Cookies from "js-cookie";
@@ -38,7 +40,8 @@ class AddNewContact extends Component {
             tumblr: "",                
             pinterest: "",
             notes: "",
-            error: ""
+            error: "",
+            redirectTo: ""
         }
     }
 
@@ -62,7 +65,7 @@ class AddNewContact extends Component {
         ]
 
         for (let entry of required) { // Iterate through list of required fields and check each one
-            console.log(`Testing ${entry}`);
+            // console.log(`Testing ${entry}`);
             let el = document.getElementById(entry); // Get input element by id
             el.classList.remove("errorBg"); // Remove error background color
 
@@ -83,7 +86,6 @@ class AddNewContact extends Component {
         }
 
         if (!error) {
-            console.log(`No errors! Submitting ${JSON.stringify(this.state)}`);
 
             let newContact = {
                 firstName: this.state.firstName,
@@ -91,7 +93,7 @@ class AddNewContact extends Component {
                 email: this.state.email,
                 birthday: this.state.birthday,
                 phoneNumber: this.state.phoneNumber,
-                photos: [this.state.contactPhoto],
+                photos: this.state.contactPhoto,
                 notes: this.state.notes,
                 socialMedia: {
                     twitter: { handle: this.state.twitter },
@@ -100,25 +102,29 @@ class AddNewContact extends Component {
                 }
             }
 
-            // TODO: Submission code. Fix the client side api request. parameters may be messed up.
-            console.log(JSON.stringify(newContact))
+            console.log(`No errors! Submitting ${JSON.stringify(newContact)}`);
+            
             API.addContact(`/${Cookies.get("google_id")}`, newContact)
 
             alert(`${newContact.firstName} ${newContact.lastName} has been added to your contacts!`)
 
-            this.setState({
-                error: "", // Clear error message
-                firstName: "",
-                lastName: "",
-                email: "",
-                birthday: "",
-                phoneNumber: "",
-                contactPhoto: [""],
-                twitter: "",
-                tumblr: "",                
-                pinterest: "",
-                notes: ""
-            })
+            this.props.history.push("/addressBook");
+
+            // this.setState({
+            //     error: "", // Clear error message
+            //     firstName: "",
+            //     lastName: "",
+            //     email: "",
+            //     birthday: "",
+            //     phoneNumber: "",
+            //     contactPhoto: [""],
+            //     twitter: "",
+            //     tumblr: "",                
+            //     pinterest: "",
+            //     notes: "",
+            //     // redirectTo: "/addressBook"
+            // })
+
         } else {
             this.setState({
                 error: error, // Display error in 'errorMsg' <p> element
@@ -127,6 +133,14 @@ class AddNewContact extends Component {
     }
 
     render() {
+        if (this.state.redirectTo) {
+            return (
+                <div>
+                    <Redirect to={{ pathname: this.state.redirectTo }} />
+                </div>
+            )
+        }
+
         return (
             <div className="newContactContainer">
                 <Jumbotron>
@@ -267,4 +281,4 @@ class AddNewContact extends Component {
     }
 }
 
-export default AddNewContact;
+export default withRouter(AddNewContact);
