@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import AddressBook from "./pages/AddressBook";
 import NewContactForm from "./pages/NewContactForm";
+import EditContactForm from "./pages/EditContactForm";
 import ContactDetail from "./pages/ContactDetail";
 import NoMatch from "./pages/NoMatch";
 import Footer from "./components/Footer/footer"
@@ -32,6 +33,7 @@ class App extends Component {
                 <Route exact path="/" component={Login} />
                 <Route exact path="/addressbook" component={AddressBook} />
                 <Route exact path="/newcontact" component={NewContactForm} />
+                <Route exact path="/editcontact" component={EditContactForm} />
                 <Route exact path="/contactdetail" component={ContactDetail} />
                 <Route component={NoMatch} />
               </Switch>

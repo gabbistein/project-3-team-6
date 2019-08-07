@@ -44,7 +44,7 @@ class AddressBook extends Component {
 
         this.state = {
             loggedIn: true,
-            contacts: [], 
+            contacts: [],
             filteredContacts: [], // Once filtering is decided.
             mode: "All Contacts", // or "One Contact",
             viewId: null,
@@ -67,9 +67,9 @@ class AddressBook extends Component {
 
     deleteContact = (id) => { //TODO need to delete from database
         API.deleteUser(Cookies.get("google_id"), id);
-        
+
         let { contacts } = this.state;
-       
+
         let newContacts = contacts.filter((contact) => {
             return contact._id !== id
         })
@@ -82,6 +82,7 @@ class AddressBook extends Component {
     loadContacts = () => {
         API.getUser(Cookies.get("google_id"))
             .then(res => {
+                console.log(res.data)
                 this.setState({ contacts: res.data.contacts })
             })
             .catch(err => console.log(err));
