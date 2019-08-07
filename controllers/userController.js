@@ -33,21 +33,24 @@ module.exports = {
     // .catch(err => res.status(422).json(err));
   },
   addContact: function (req, res) {
-    console.log(req.body)
     db.User
       .findOneAndUpdate(
         { googleId: req.params.id },
-        { $push: { contacts: req.body } }
+        { $push: { contacts: req.body } },
+        { upsert: true }
       )
       .catch(err => console.log(err));
   },
-  // remove contact from list
+  updateContact: function (req, res) {
+    db.User
+      .findOneAndUpdate(
+        { googleId: req.params.id },
+        // { contacts:  },
+        { upsert: true }
+      )
+      .catch(err => console.log(err));
+  },
   remove: function (req, res) {
-    // Need to find user id, then contacts id
-
-    console.log(req.params.userId)
-    console.log(req.params.contactId)
-
     db.User
       .findOneAndUpdate(
         { googleId: req.params.userId },

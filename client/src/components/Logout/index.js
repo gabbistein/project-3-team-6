@@ -32,7 +32,7 @@ class Logout extends Component {
             // //     <button onClick={renderProps.onClick} >Logout</button>
             // // )}
             // />
-            <button onClick={this.logout} className="waves-effect waves-light btn-large red">Logout</button>
+            <a onClick={this.logout} className="waves-effect waves-light btn-large red">Logout</a>
         );
     }
 }
