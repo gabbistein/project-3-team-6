@@ -1,5 +1,19 @@
 import React, { Component } from "react";
 
+let ccStyle= {
+  name: {
+    align: "center",
+    color: "white",
+    paddingRight: 40,
+    paddingLeft: 40
+  },
+  firstCol: {
+    padding: 0,
+    marginRight: 0
+  },
+
+}
+
 class Contact extends Component {
   constructor(props) {
     super(props);

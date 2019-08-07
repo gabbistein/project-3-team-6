@@ -11,7 +11,7 @@ let loginJumbotron = {
     marginBottom: 0,
     width: "65%",
     left: "50%",
-    transform: "translate(-50%,18%)",
+    transform: "translate(-50%,40%)",
     title: {
         fontFamily: "Berkshire Swash, cursive",
         fontSize: 90,
@@ -37,7 +37,7 @@ class Login extends Component {
             this.setState({
                 isLoggedIn: true
             })
-            
+
             console.log("Logging in...")
 
             API.saveUser(

@@ -9,7 +9,7 @@ let style = {
     borderTopWidth: "7px",
     borderTopStyle: "solid",
     borderTopColor: "rgb(252, 202, 54, 0.6)",
-    position: relative
+    position: relative,
 }
 
 let divStyle = {

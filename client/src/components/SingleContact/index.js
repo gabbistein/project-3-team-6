@@ -4,6 +4,10 @@ import Cookies from "js-cookie";
 import dotenv from "dotenv"
 dotenv.config()
 
+let singleStyle = {
+    paddingTop: 10
+}
+
 class SingleContact extends Component {
     constructor(props) {
         super(props);

@@ -1,5 +1,6 @@
 .addressBookJumbotron {
     position: "absolute";
+    height: 75vh;
     border-radius: 8px;
     padding-top: 100px;
     padding-bottom: 100px;
