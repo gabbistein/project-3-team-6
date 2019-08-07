@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Cookies from "js-cookie";
-import { GoogleLogout } from 'react-google-login';
 
 class Logout extends Component {
     state = {
@@ -33,7 +32,7 @@ class Logout extends Component {
             // //     <button onClick={renderProps.onClick} >Logout</button>
             // // )}
             // />
-            <a onClick={this.logout} className="waves-effect waves-light btn-large red">Logout</a>
+            <button onClick={this.logout} className="waves-effect waves-light btn-large red">Logout</button>
         );
     }
 }

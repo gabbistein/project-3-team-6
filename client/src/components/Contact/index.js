@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Col, Row, Container } from "../Grid";
 
 let ccStyle= {
   name: {
@@ -29,10 +28,18 @@ class Contact extends Component {
   socialButtonClick = (event) => {
     let { payload } = this.props; // This will need to be customized once
 
-    console.log(`User ${payload.id}: ${payload.firstName} ${payload.lastName}`);
+    console.log(`User ${payload._id}: ${payload.firstName} ${payload.lastName}`);
     let { target } = event;
 
-    this.props.swapView("One Contact", payload.id, target.name);
+    this.props.swapView("One Contact", payload._id, target.name);
+  }
+
+  removeButtonClick = (event) => {
+    let { payload } = this.props; // This will need to be customized once
+
+    console.log(`User ${payload._id}: ${payload.firstName} ${payload.lastName}`);
+
+    this.props.deleteContact(payload._id);
   }
 
   render() {
@@ -41,19 +48,23 @@ class Contact extends Component {
     return (
       <div className="container-fluid">
         <hr></hr>
-        <div className="row">
-          <div className="col-md-2" style={ccStyle.firstCol}>
-            <img src="https://via.placeholder.com/128" alt="Contact" />
+        <div className="Contact row">
+          <div className="col-sm-2 align-self-center">
+            {(payload.photos.length < 1) ?
+              <img src="https://via.placeholder.com/128" alt="Contact" /> :
+              <img src={payload.photos[0]} alt="Contact" />
+            }
           </div>
-          <div className="col-md-3 my-auto">
-            <a className="waves-effect waves-light btn-large red" style={ccStyle.name} onClick={this.socialButtonClick}><p userId={payload.id}>{payload.firstName}</p></a>
-            {console.log(JSON.stringify(this.props.payload, null, 2))}
+          <div className="col-sm-2 align-self-center">
+            <button className="btn" type="button" onClick={this.socialButtonClick} data-userid={payload._id}><p>{payload.firstName}</p></button>
           </div>
-          <div className="col-md-7 my-auto">
-            <button id="facebook" name="Facebook" data-userid={payload.id} onClick={this.socialButtonClick}>Facebook</button>
-            <button id="instagram" name="Instagram" data-userid={payload.id} onClick={this.socialButtonClick}>Instagram</button>
-            <button id="twitter" name="Twitter" data-userid={payload.id} onClick={this.socialButtonClick}>Twitter</button>
-            <button id="linkedIn" name="LinkedIn" data-userid={payload.id} onClick={this.socialButtonClick}>LinkedIn</button>
+          <div className="col-sm-2 align-self-center">
+            <button className="btn" type="button" onClick={this.removeButtonClick} data-userid={payload._id}><p>Remove</p></button>
+          </div>
+          <div className="col-sm-6 align-self-center">
+            <button className="btn" id="twitter" name="twitter" data-userid={payload._id} onClick={this.socialButtonClick}>Twitter</button>
+            <button className="btn" id="tumblr" name="tumblr" data-userid={payload._id} onClick={this.socialButtonClick}>Tumblr</button>
+            <button className="btn" id="pinterest" name="pinterest" data-userid={payload._id} onClick={this.socialButtonClick}>Pinterest</button>
           </div>
         </div>
       </div>

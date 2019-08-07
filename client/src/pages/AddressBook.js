@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import Jumbotron from "../components/Jumbotron";
-import { Col, Row, Container } from "../components/Grid";
-import { Link } from "react-router-dom";
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { Col, Row } from "../components/Grid";
 import Contact from "../components/Contact";
 import SingleContact from "../components/SingleContact";
 import Nav from "../components/Nav";
-import AddressBookJumbo from "../components/AddressBookJumbo"
+import AddressBookJumbo from "../components/AddressBookJumbo";
+import API from "../utils/API";
+import Cookies from "js-cookie";
 
 let addressStyle = {
     button: {
@@ -20,34 +19,32 @@ let addressStyle = {
     }
 }
 
-const fakeUser = {
-    id: 1,
-    firstName: "Vish",
-    lastName: "Diwan",
-    email: "vishdiwan@gmail.com",
-    birthday: "1991-11-29",
-    phoneNumber: "253-334-5715",
-    facebook: "https://www.facebook.com/vishdiwan",
-    instagram: "https://www.instagram.com/vishdiwan",
-    twitter: "https://www.twitter.com/vishdiwan",
-    linkedIn: "https://www.linkedin.com/vishdiwan",
-    notes: "Real cool guy, favorite contact",
+var fakeUsers = [];
+function fakeUser(id) {
+    return {
+        id: id,
+        firstName: "Vish",
+        lastName: "Diwan",
+        email: "vishdiwan@gmail.com",
+        birthday: "1991-11-29",
+        phoneNumber: "253-334-5715",
+        facebook: "https://www.facebook.com/vishdiwan",
+        instagram: "https://www.instagram.com/vishdiwan",
+        twitter: "https://www.twitter.com/vishdiwan",
+        linkedIn: "https://www.linkedin.com/vishdiwan",
+        notes: "Real cool guy, favorite contact",
+    }
 }
-
+for (let i = 0; i < 4; i++) {
+    fakeUsers.push(fakeUser(i))
+}
 class AddressBook extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             loggedIn: true,
-            contacts: [ // some fake data. DELETE when real data comes in.
-                fakeUser,
-                fakeUser,
-                fakeUser,
-                fakeUser,
-                fakeUser,
-
-            ],
+            contacts: [], 
             filteredContacts: [], // Once filtering is decided.
             mode: "All Contacts", // or "One Contact",
             viewId: null,
@@ -61,23 +58,34 @@ class AddressBook extends Component {
                 "Professors": true,
             },
         };
-
-    }
-
-    componentWillMount() {
     }
 
     componentDidMount() {
-        // this.loadContacts();
+        this.loadContacts();
+        console.log("address book mounted", this.state.contacts);
     };
 
-    // loadContacts = () => {
-    //     API.getContacts()
-    //         .then(res =>
-    //             this.setState({})
-    //         )
-    //         .catch(err => console.log(err));
-    // };
+    deleteContact = (id) => { //TODO need to delete from database
+        API.deleteUser(Cookies.get("google_id"), id);
+        
+        let { contacts } = this.state;
+       
+        let newContacts = contacts.filter((contact) => {
+            return contact._id !== id
+        })
+
+        this.setState({
+            contacts: newContacts,
+        })
+    }
+
+    loadContacts = () => {
+        API.getUser(Cookies.get("google_id"))
+            .then(res => {
+                this.setState({ contacts: res.data.contacts })
+            })
+            .catch(err => console.log(err));
+    };
 
     filterChange = (event) => { // When a checkbox in the filter is checked, it updates in state
         console.log('Filter Change', event.target.id, event.target.checked);
@@ -116,29 +124,32 @@ class AddressBook extends Component {
     }
 
     renderContactView = () => { // switches view of contact components or single contact view
-        let { viewId } = this.state;
+        // let { viewId } = this.state;
 
         switch (this.state.mode) {
             case "All Contacts":
                 return this.allView();
-                break;
             case "One Contact":
                 // return console.log(this.state.viewId);
                 return this.oneView(this.state.viewId);
-                break;
             default:
                 return <h1>Error: Attempted state mode - {this.state.mode}</h1>
         }
-
     }
 
     allView = () => { // builds list of all contacts
         let { contacts } = this.state;
 
+        if (contacts.length < 1 || contacts === undefined) {
+            return (
+                <h3>You have no contacts yet! Please add a contact!</h3>
+            )
+        }
+
         let list = [];
 
         for (let contact of contacts) {
-            list.push(<Contact key={contact.id} payload={contact} swapView={this.swapView} />);
+            list.push(<Contact key={contact._id} payload={contact} swapView={this.swapView} deleteContact={this.deleteContact} />);
         }
 
         return list;
@@ -147,14 +158,13 @@ class AddressBook extends Component {
     oneView = (userid) => { // Renders a single contact view
         console.log("One View", userid)
         let { contacts, socialType } = this.state;
-        
-        let thisContact = contacts.find(contact => contact.id === userid);
+
+        let thisContact = contacts.find(contact => contact._id === userid);
 
         return <SingleContact payload={thisContact} socialType={socialType} swapView={this.swapView} />
     }
 
     swapView = (mode, viewId, socialType) => { // Action to swap view state
-        console.log("Swapp!")
         this.setState({
             mode,
             viewId,
@@ -182,7 +192,7 @@ class AddressBook extends Component {
                         <Row>
                             <Col size="sm-12 md-2">
                                 <div className="text-center">
-                                    <a className="waves-effect waves-light btn-small red" onClick={this.addContact}><span style={addressStyle.button}>New Contact</span></a>
+                                    <button className="waves-effect waves-light btn-small red" onClick={this.addContact}><span style={addressStyle.button}>New Contact</span></button>
                                 </div>
                                 <br></br>
                                 <form className="filtersContainer">

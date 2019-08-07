@@ -1,19 +1,14 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import API from "../../utils/API";
 import "./style.css";
 
 class ContactDetail extends Component {
-    constructor(props){
-        super(props);
-    }
     render(){
         return(
             <div className="ContactDetail container">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-md-2">
-                            <img src="https://via.placeholder.com/128" alt="Profile Picture"/>
+                            <img src="https://via.placeholder.com/128" alt="Profile"/>
                         </div>
                         <div className="col-md-10">
                             <h1 className="text-left">Vish Diwan</h1>

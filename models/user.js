@@ -9,7 +9,15 @@ const userSchema = new Schema({
   googleId: { type: String, unique: true, required: true },
   photos: [],
   userSocialMedia: {
+    facebook: {
+      handle: { type: String, unique: false, trim: true, required: false },
+      link: { type: String, unique: false, trim: true, required: false }
+    },
     instagram: {
+      handle: { type: String, unique: false, trim: true, required: false },
+      link: { type: String, unique: false, trim: true, required: false }
+    },
+    linkedin: {
       handle: { type: String, unique: false, trim: true, required: false },
       link: { type: String, unique: false, trim: true, required: false }
     },
@@ -17,11 +25,11 @@ const userSchema = new Schema({
       handle: { type: String, unique: false, trim: true, required: false },
       link: { type: String, unique: false, trim: true, required: false }
     },
-    facebook: {
+    tumblr: {
       handle: { type: String, unique: false, trim: true, required: false },
       link: { type: String, unique: false, trim: true, required: false }
     },
-    linkedIn: {
+    pinterest: {
       handle: { type: String, unique: false, trim: true, required: false },
       link: { type: String, unique: false, trim: true, required: false }
     }
@@ -36,7 +44,15 @@ const userSchema = new Schema({
       notes: { body: String, required: false },
       photos: [{ type: String, required: false }],
       socialMedia: {
+        facebook: {
+          handle: { type: String, unique: false, trim: true, required: false },
+          link: { type: String, unique: false, trim: true, required: false }
+        },
         instagram: {
+          handle: { type: String, unique: false, trim: true, required: false },
+          link: { type: String, unique: false, trim: true, required: false }
+        },
+        linkedin: {
           handle: { type: String, unique: false, trim: true, required: false },
           link: { type: String, unique: false, trim: true, required: false }
         },
@@ -44,11 +60,11 @@ const userSchema = new Schema({
           handle: { type: String, unique: false, trim: true, required: false },
           link: { type: String, unique: false, trim: true, required: false }
         },
-        facebook: {
+        tumblr: {
           handle: { type: String, unique: false, trim: true, required: false },
           link: { type: String, unique: false, trim: true, required: false }
         },
-        linkedIn: {
+        pinterest: {
           handle: { type: String, unique: false, trim: true, required: false },
           link: { type: String, unique: false, trim: true, required: false }
         }

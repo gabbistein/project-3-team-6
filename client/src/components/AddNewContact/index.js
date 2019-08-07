@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, TextArea, FormBtn } from '../Form';
+import { Input, TextArea } from '../Form';
 import validator from 'validator';
 import Jumbotron from '../Jumbotron';
 import API from "../../utils/API";
@@ -33,12 +33,12 @@ class AddNewContact extends Component {
             email: "",
             birthday: "",
             phoneNumber: "",
-            facebook: "",
-            instagram: "",
+            contactPhoto: [""],
             twitter: "",
-            linkedIn: "",
+            tumblr: "",                
+            pinterest: "",
             notes: "",
-            error: "",
+            error: ""
         }
     }
 
@@ -58,7 +58,7 @@ class AddNewContact extends Component {
             "lastName",
             "email",
             "birthday",
-            "phoneNumber",
+            "phoneNumber"
         ]
 
         for (let entry of required) { // Iterate through list of required fields and check each one
@@ -91,12 +91,12 @@ class AddNewContact extends Component {
                 email: this.state.email,
                 birthday: this.state.birthday,
                 phoneNumber: this.state.phoneNumber,
+                photos: [this.state.contactPhoto],
                 notes: this.state.notes,
                 socialMedia: {
-                    facebook: { link: this.state.facebook },
-                    instagram: { link: this.state.instagram },
-                    twitter: { link: this.state.twitter },
-                    linkedIn: { link: this.state.linkedIn }
+                    twitter: { handle: this.state.twitter },
+                    tumblr: { handle: this.state.tumblr },
+                    pinterest: { handle: this.state.pinterest }
                 }
             }
 
@@ -104,8 +104,20 @@ class AddNewContact extends Component {
             console.log(JSON.stringify(newContact))
             API.addContact(`/${Cookies.get("google_id")}`, newContact)
 
+            alert(`${newContact.firstName} ${newContact.lastName} has been added to your contacts!`)
+
             this.setState({
                 error: "", // Clear error message
+                firstName: "",
+                lastName: "",
+                email: "",
+                birthday: "",
+                phoneNumber: "",
+                contactPhoto: [""],
+                twitter: "",
+                tumblr: "",                
+                pinterest: "",
+                notes: ""
             })
         } else {
             this.setState({
@@ -131,17 +143,19 @@ class AddNewContact extends Component {
                                         id="firstName"
                                         value={this.state.firstName}
                                         onChange={this.handleChange}
+                                        placeholder="John"
                                     />
                                 </div>
 
                                 <div className="formField">
                                     <label htmlFor="lastName">Last name: </label>
-                                    <input
+                                    <Input
                                         type="text"
                                         name="lastName"
                                         id="lastName"
                                         value={this.state.lastName}
                                         onChange={this.handleChange}
+                                        placeholder="Smith"
                                     />
                                 </div>
 
@@ -153,6 +167,7 @@ class AddNewContact extends Component {
                                         id="email"
                                         value={this.state.email}
                                         onChange={this.handleChange}
+                                        placeholder="john.smith@stem.com"
                                     />
                                 </div>
 
@@ -164,6 +179,7 @@ class AddNewContact extends Component {
                                         id="phoneNumber"
                                         value={this.state.phoneNumber}
                                         onChange={this.handleChange}
+                                        placeholder="4251239876"
                                     />
                                 </div>
 
@@ -175,6 +191,18 @@ class AddNewContact extends Component {
                                         id="birthday"
                                         value={this.state.birthday}
                                         onChange={this.handleChange}
+                                    />
+                                </div>
+
+                                <div className="formField">
+                                    <label htmlFor="contactPhoto">Contact Photo: </label>
+                                    <Input
+                                        type="text"
+                                        name="contactPhoto"
+                                        id="contactPhoto"
+                                        value={this.state.contactPhoto}
+                                        onChange={this.handleChange}
+                                        placeholder="Image Url"
                                     />
                                 </div>
                             </div>
@@ -190,29 +218,9 @@ class AddNewContact extends Component {
                                 </TextArea>
                             </div>
                         </div>
+                        
                         <div className="socialsSection">
                             <h2 style={contactStyle.headers}>Socials</h2>
-                            <div className="formField">
-                                <label htmlFor="facebook">Facebook: </label>
-                                <Input
-                                    type="text"
-                                    name="facebook"
-                                    id="facebook"
-                                    value={this.state.facebook}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-
-                            <div className="formField">
-                                <label htmlFor="instagram">Instagram: </label>
-                                <Input
-                                    type="text"
-                                    name="instagram"
-                                    id="instagram"
-                                    value={this.state.instagram}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
 
                             <div className="formField">
                                 <label htmlFor="twitter">Twitter: </label>
@@ -222,22 +230,36 @@ class AddNewContact extends Component {
                                     id="twitter"
                                     value={this.state.twitter}
                                     onChange={this.handleChange}
+                                    placeholder="Twitter Handle"
                                 />
                             </div>
 
                             <div className="formField">
-                                <label htmlFor="linkedIn">LinkedIn: </label>
+                                <label htmlFor="tumblr">Tumblr: </label>
                                 <Input
                                     type="text"
-                                    name="linkedIn"
-                                    id="linkedIn"
-                                    value={this.state.linkedIn}
+                                    name="tumblr"
+                                    id="tumblr"
+                                    value={this.state.tumblr}
                                     onChange={this.handleChange}
+                                    placeholder="Tumblr Username"
+                                />
+                            </div>
+
+                            <div className="formField">
+                                <label htmlFor="pinterest">Pinterest: </label>
+                                <Input
+                                    type="text"
+                                    name="pinterest"
+                                    id="pinterest"
+                                    value={this.state.pinterest}
+                                    onChange={this.handleChange}
+                                    placeholder="Pinterest Username"
                                 />
                             </div>
                         </div>
                         <p className="errorMsg">{this.state.error}</p>
-                        <a className="waves-effect waves-light btn-large red" onClick={this.handleSubmit}><span style={contactStyle.button}>New Contact</span></a>
+                        <button className="waves-effect waves-light btn-large red" onClick={this.handleSubmit}><span style={contactStyle.button}>New Contact</span></button>
                     </form>
                 </Jumbotron>
             </div>
