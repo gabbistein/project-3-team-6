@@ -57,7 +57,7 @@ class Contact extends Component {
           <div className="col-sm-2 align-self-center">
             {(payload.photos.length < 1) ?
               <img src="https://via.placeholder.com/128" alt="Contact" style={ccStyle.imageFormat}/> :
-              <img src={payload.photos[0]} alt="Contact" />
+              <img src={payload.photos[0]} alt="Contact" style={ccStyle.imageFormat}/>
             }
           </div>
           <div className="col-sm-2 align-self-center">
