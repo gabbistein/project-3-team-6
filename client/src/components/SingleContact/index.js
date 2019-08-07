@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import tumblr from "tumblr.js";
 import API from "../../utils/API";
 import Cookies from "js-cookie";
 import dotenv from "dotenv"
@@ -19,27 +18,6 @@ class SingleContact extends Component {
 
     handleSwap = (event) => {
         this.props.swapView("All Contacts", null, null);
-    }
-
-    queryTumblr() {
-        let userBlogName = this.state.name;
-        var consumerKey = process.env.REACT_APP_API_KEY;
-        var consumerSecret = process.env.REACT_APP_API_KEY;
-        var token = process.env.REACT_APP_TOKEN;
-        var tokenSecret = process.env.REACT_APP_TOKEN_SECRET;
-        var client = tumblr.createClient({ 
-            consumer_key: consumerKey,
-            consumer_secret: consumerSecret,
-            token: token,
-            tokenSecret: tokenSecret
-        });
-
-        // //this is querying the tumblr blog method, pulls back an object of basic info
-        // client.blogPosts(`${userBlogName}`, (err, response) => {
-        //     this.setState({ 
-        //         userPosts: response.posts,
-        //     })
-        // })
     }
 
     componentDidMount() {

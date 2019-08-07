@@ -15,5 +15,6 @@ router
 router
   .route("/:userId/:contactId")
   .delete(userController.remove)
+  .put(userController.updateContact)
 
 module.exports = router;

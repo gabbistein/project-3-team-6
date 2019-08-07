@@ -33,6 +33,7 @@ class Contact extends Component {
 
     return (
       <div className="container-fluid">
+        <hr></hr>
         <div className="Contact row">
           <div className="col-sm-2 align-self-center">
             {(payload.photos.length < 1) ?
