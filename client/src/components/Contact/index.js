@@ -1,6 +1,20 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../Grid";
 
+let ccStyle= {
+  name: {
+    align: "center",
+    color: "white",
+    paddingRight: 40,
+    paddingLeft: 40
+  },
+  firstCol: {
+    padding: 0,
+    marginRight: 0
+  },
+
+}
+
 class Contact extends Component {
   constructor(props) {
     super(props);
@@ -26,15 +40,16 @@ class Contact extends Component {
 
     return (
       <div className="container-fluid">
-        <div className="Contact row">
-          <div className="col s-2">
+        <hr></hr>
+        <div className="row">
+          <div className="col-md-2" style={ccStyle.firstCol}>
             <img src="https://via.placeholder.com/128" alt="Contact" />
           </div>
-          <div className="col s-4">
-            <button type="button" onClick={this.socialButtonClick}><p userId={payload.id}>{payload.firstName}</p></button>
-            <p>{JSON.stringify(this.props.payload)}</p>
+          <div className="col-md-3 my-auto">
+            <a className="waves-effect waves-light btn-large red" style={ccStyle.name} onClick={this.socialButtonClick}><p userId={payload.id}>{payload.firstName}</p></a>
+            {console.log(JSON.stringify(this.props.payload, null, 2))}
           </div>
-          <div className="col s-6">
+          <div className="col-md-7 my-auto">
             <button id="facebook" name="Facebook" data-userid={payload.id} onClick={this.socialButtonClick}>Facebook</button>
             <button id="instagram" name="Instagram" data-userid={payload.id} onClick={this.socialButtonClick}>Instagram</button>
             <button id="twitter" name="Twitter" data-userid={payload.id} onClick={this.socialButtonClick}>Twitter</button>

@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../Grid";
 import tumblr from "tumblr.js"
 
+let singleStyle = {
+    paddingTop: 10
+}
+
 class SingleContact extends Component {
     constructor(props) {
         super(props);
@@ -35,9 +39,9 @@ class SingleContact extends Component {
         return (
             <div className="SingleContact">
                 <h1>{payload.firstName}</h1>
-                <p>{JSON.stringify(payload)}</p>
-                <p>Showing {socialType}</p>
-                <button onClick={this.handleSwap}>Back</button>
+                <p style={singleStyle}>{JSON.stringify(payload, null, 2)}</p>
+                <p style={singleStyle}>Showing {socialType}</p>
+                <a className="waves-effect waves-light btn-small red" onClick={this.handleSwap}>Back</a>
             </div>
         )
     }
