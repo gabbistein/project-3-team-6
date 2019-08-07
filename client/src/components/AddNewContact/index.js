@@ -37,11 +37,10 @@ class AddNewContact extends Component {
             phoneNumber: "",
             contactPhoto: [""],
             twitter: "",
-            tumblr: "",                
+            tumblr: "",
             pinterest: "",
             notes: "",
-            error: "",
-            redirectTo: ""
+            error: ""
         }
     }
 
@@ -80,7 +79,7 @@ class AddNewContact extends Component {
             error = "Email is invalid"; // Set error message
         }
 
-        if (!validator.isMobilePhone(this.state.phoneNumber)) { // Use validator to verify phone number format
+        if (!validator.isMobilePhone(this.state.phoneNumber, "en-US")) { // Use validator to verify phone number format
             document.getElementById("phoneNumber").classList.add("errorBg"); // Add error background color
             error = "Phone Number is invalid."; // Set error message
         }
@@ -103,28 +102,26 @@ class AddNewContact extends Component {
             }
 
             console.log(`No errors! Submitting ${JSON.stringify(newContact)}`);
-            
-            API.addContact(`/${Cookies.get("google_id")}`, newContact)
+
+            API.addContact(`/${Cookies.get("google_id")}`, newContact).catch(err => console.log(err))
 
             alert(`${newContact.firstName} ${newContact.lastName} has been added to your contacts!`)
 
+            this.setState({
+                error: "", // Clear error message
+                firstName: "",
+                lastName: "",
+                email: "",
+                birthday: "",
+                phoneNumber: "",
+                contactPhoto: [""],
+                twitter: "",
+                tumblr: "",
+                pinterest: "",
+                notes: ""
+            })
+
             this.props.history.push("/addressBook");
-
-            // this.setState({
-            //     error: "", // Clear error message
-            //     firstName: "",
-            //     lastName: "",
-            //     email: "",
-            //     birthday: "",
-            //     phoneNumber: "",
-            //     contactPhoto: [""],
-            //     twitter: "",
-            //     tumblr: "",                
-            //     pinterest: "",
-            //     notes: "",
-            //     // redirectTo: "/addressBook"
-            // })
-
         } else {
             this.setState({
                 error: error, // Display error in 'errorMsg' <p> element
@@ -232,7 +229,7 @@ class AddNewContact extends Component {
                                 </TextArea>
                             </div>
                         </div>
-                        
+
                         <div className="socialsSection">
                             <h2 style={contactStyle.headers}>Socials</h2>
 

@@ -82,7 +82,7 @@ class AddressBook extends Component {
     loadContacts = () => {
         API.getUser(Cookies.get("google_id"))
             .then(res => {
-                console.log(res.data)
+                console.log(res.data.contacts)
                 this.setState({ contacts: res.data.contacts })
             })
             .catch(err => console.log(err));
