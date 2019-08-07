@@ -1,5 +1,24 @@
 import React, { Component } from "react";
 
+let ccStyle= {
+  name: {
+    align: "center",
+    color: "white",
+    paddingRight: 40,
+    paddingLeft: 40
+  },
+  firstCol: {
+    padding: 0,
+    marginRight: 0
+  },
+  imageFormat: {
+    borderRadius: 5,
+    width: 128,
+    height: 128
+  }
+
+}
+
 class Contact extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +56,7 @@ class Contact extends Component {
         <div className="Contact row">
           <div className="col-sm-2 align-self-center">
             {(payload.photos.length < 1) ?
-              <img src="https://via.placeholder.com/128" alt="Contact" /> :
+              <img src="https://via.placeholder.com/128" alt="Contact" style={ccStyle.imageFormat}/> :
               <img src={payload.photos[0]} alt="Contact" />
             }
           </div>
