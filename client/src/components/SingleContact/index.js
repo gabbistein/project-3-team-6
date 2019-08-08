@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import API from "../../utils/API";
-import Cookies from "js-cookie";
 import dotenv from "dotenv";
-dotenv.config()
+import moment from "moment";
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
+dotenv.config();
 
 let singleStyle = {
     paddingTop: 10
@@ -34,6 +34,9 @@ class SingleContact extends Component {
                     <h1>{`${payload.firstName} ${payload.lastName}`}</h1>
                     <img src={payload.photos[0]}></img>
                     <p>Email: {payload.email}</p>
+                    <p>Phone: {parsePhoneNumberFromString("+1" + payload.phoneNumber).formatNational()}</p>
+                    <p>Birthdate: {moment(payload.birthdate).format("MMM Do, YYYY")}</p>
+                    <p>Notes: {payload.notes ? payload.notes : "No notes!" }</p>
                 <button onClick={this.handleSwap}>Back</button>
                 </div>
             )
@@ -58,7 +61,6 @@ class SingleContact extends Component {
                 </div>
             )
         }
-
     }
 }
 
