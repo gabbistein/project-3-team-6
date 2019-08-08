@@ -32,7 +32,7 @@ function fakeUser(id) {
         instagram: "https://www.instagram.com/vishdiwan",
         twitter: "https://www.twitter.com/vishdiwan",
         linkedIn: "https://www.linkedin.com/vishdiwan",
-        notes: "Real cool guy, favorite contact",
+        notes: "Real cool guy, favorite contact"
     }
 }
 for (let i = 0; i < 4; i++) {
@@ -56,16 +56,16 @@ class AddressBook extends Component {
                 "Friends": true,
                 "People to Avoid": true,
                 "Professors": true,
-            },
+            }
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.loadContacts();
-        console.log("address book mounted", this.state.contacts);
+        console.log("address book mounting...", this.state.contacts);
     };
 
-    deleteContact = (id) => { //TODO need to delete from database
+    deleteContact = (id) => {
         API.deleteUser(Cookies.get("google_id"), id);
 
         let { contacts } = this.state;
@@ -82,8 +82,10 @@ class AddressBook extends Component {
     loadContacts = () => {
         API.getUser(Cookies.get("google_id"))
             .then(res => {
-                console.log(res.data)
-                this.setState({ contacts: res.data.contacts })
+                console.log(res.data.contacts)
+                let sortedContactsList = res.data.contacts.sort((a, b) => a.firstName.localeCompare(b.firstName)) /* Sorts contacts alphabetically by first name. If we add filters later, we can make this a switch case */
+
+                this.setState({ contacts: sortedContactsList })
             })
             .catch(err => console.log(err));
     };
@@ -125,8 +127,6 @@ class AddressBook extends Component {
     }
 
     renderContactView = () => { // switches view of contact components or single contact view
-        // let { viewId } = this.state;
-
         switch (this.state.mode) {
             case "All Contacts":
                 return this.allView();
@@ -175,12 +175,6 @@ class AddressBook extends Component {
 
     addContact = () => this.props.history.push("/newContact")
 
-    // ----- TO DO: -----
-
-    // Add contact deletion here
-    // Users social media login?
-
-    // ----- JSX Address Book page ----
     render() {
         return (
             <div>

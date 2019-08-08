@@ -38,11 +38,11 @@ const userSchema = new Schema({
     {
       firstName: { type: String, unique: false },
       lastName: { type: String, unique: false },
-      phoneNumber: { type: String, required: false },
-      email: { type: String, required: false },
-      birthdate: { type: Date, required: false },
-      notes: { body: String, required: false },
-      photos: [{ type: String, required: false }],
+      phoneNumber: { type: String, required: false, unique: false },
+      email: { type: String, required: false, unique: false },
+      birthdate: { type: Date, required: false, unique: false },
+      notes: { type: String, required: false, unique: false },
+      photos: [{ type: String, required: false, unique: false }],
       socialMedia: {
         facebook: {
           handle: { type: String, unique: false, trim: true, required: false },

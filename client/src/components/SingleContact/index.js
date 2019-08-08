@@ -1,11 +1,17 @@
 import React, { Component } from "react";
-import API from "../../utils/API";
-import Cookies from "js-cookie";
-import dotenv from "dotenv"
-dotenv.config()
+import dotenv from "dotenv";
+import moment from "moment";
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
+dotenv.config();
 
 let singleStyle = {
-    paddingTop: 10
+    paddingTop: 10,
+    imageFormat: {
+        borderRadius: 5,
+        width: 128,
+        height: 128,
+        marginBottom: 10
+    }
 }
 
 class SingleContact extends Component {
@@ -24,40 +30,47 @@ class SingleContact extends Component {
         this.props.swapView("All Contacts", null, null);
     }
 
-    componentDidMount() {
-        console.log(`User id: ${Cookies.get("google_id")}`)
-        console.log(`Contact id: ${this.props.payload._id}`)
-        API.getUser(Cookies.get("google_id")).then(user => { /* TODO: currently only grabs first person on contact list */
-            let contacts = user.data.contacts
-
-            console.log("Contacts: ")
-            console.log(contacts)
-        })
-
-        this.queryTumblr();
-    }
-
     render() {
         let { payload, socialType } = this.props;
+        console.log(payload)
 
-        return (
-            <div className="SingleContact">
-                <h1>{`${payload.firstName} ${payload.lastName}`}</h1>
-                <p>{JSON.stringify(payload)}</p>
-                <p>Showing {socialType}</p>
-                <div>
-                    <ul>
-                        {
-                            Object.keys(this.state.userPosts).map((key, i) => (
-                            <p key={i}>Hello, {this.state.userPosts.image_permalink}!</p>
-                            //this is only populating the "hello", i need a second set of eyes to find out why image_permalink isn't bringing back a value
-                        ))
-                        }
-                    </ul>
+        if (!socialType) {
+            return (
+                <div className="SingleContact">
+                    <h1>{`${payload.firstName} ${payload.lastName}`}</h1>
+                    {payload.photos.length < 1 ?
+                        <img src="https://via.placeholder.com/128" alt="Contact" style={singleStyle.imageFormat}></img> :
+                        <img src={payload.photos[0]} alt="Contact" style={singleStyle.imageFormat}></img> 
+                    }
+                    <p>Email: {payload.email}</p>
+                    <p>Phone: {parsePhoneNumberFromString("+1" + payload.phoneNumber).formatNational()}</p>
+                    <p>Birthdate: {moment(payload.birthdate).format("MMM Do, YYYY")}</p>
+                    <p>Notes: {payload.notes ? payload.notes : "No notes!"}</p>
+                    <button onClick={this.handleSwap}>Back</button>
                 </div>
-                <button onClick={this.handleSwap}>Back</button>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <div className="SingleContact">
+                    <h1>{`${payload.firstName} ${payload.lastName}'s ${socialType}`}</h1>
+
+                    <h3>Feature Coming Soon!</h3>
+
+                    <div>
+                        <ul>
+                            {
+                                Object.keys(this.state.userPosts).map((key, i) => (
+                                    <p key={i}>Hello, {this.state.userPosts.image_permalink}!</p>
+                                    //this is only populating the "hello", i need a second set of eyes to find out why image_permalink isn't bringing back a value
+                                ))
+                            }
+                        </ul>
+                    </div>
+
+                    <button onClick={this.handleSwap}>Back</button>
+                </div>
+            )
+        }
     }
 }
 

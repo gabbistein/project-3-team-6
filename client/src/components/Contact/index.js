@@ -42,7 +42,7 @@ class Contact extends Component {
   removeButtonClick = (event) => {
     let { payload } = this.props; // This will need to be customized once
 
-    console.log(`User ${payload._id}: ${payload.firstName} ${payload.lastName}`);
+    console.log(`Removed ${payload._id}: ${payload.firstName} ${payload.lastName}`);
 
     this.props.deleteContact(payload._id);
   }
