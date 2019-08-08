@@ -32,7 +32,7 @@ function fakeUser(id) {
         instagram: "https://www.instagram.com/vishdiwan",
         twitter: "https://www.twitter.com/vishdiwan",
         linkedIn: "https://www.linkedin.com/vishdiwan",
-        notes: "Real cool guy, favorite contact",
+        notes: "Real cool guy, favorite contact"
     }
 }
 for (let i = 0; i < 4; i++) {

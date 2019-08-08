@@ -41,7 +41,7 @@ const userSchema = new Schema({
       phoneNumber: { type: String, required: false, unique: false },
       email: { type: String, required: false, unique: false },
       birthdate: { type: Date, required: false, unique: false },
-      notes: { body: String, required: false, unique: false },
+      notes: { type: String, required: false, unique: false },
       photos: [{ type: String, required: false, unique: false }],
       socialMedia: {
         facebook: {

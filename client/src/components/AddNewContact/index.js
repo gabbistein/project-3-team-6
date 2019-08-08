@@ -89,7 +89,7 @@ class AddNewContact extends Component {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
                 email: this.state.email,
-                birthday: this.state.birthday,
+                birthdate: this.state.birthday,
                 phoneNumber: this.state.phoneNumber,
                 photos: this.state.contactPhoto,
                 notes: this.state.notes,

@@ -24,38 +24,41 @@ class SingleContact extends Component {
         this.props.swapView("All Contacts", null, null);
     }
 
-    componentDidMount() {
-        console.log(`User id: ${Cookies.get("google_id")}`)
-        console.log(`Contact id: ${this.props.payload._id}`)
-        API.getUser(Cookies.get("google_id")).then(user => { /* TODO: currently only grabs first person on contact list */
-            let contacts = user.data.contacts
-
-            console.log("Contacts: ")
-            console.log(contacts)
-        })
-    }
-
     render() {
         let { payload, socialType } = this.props;
+        console.log(payload)
 
-        return (
-            <div className="SingleContact">
-                <h1>{`${payload.firstName} ${payload.lastName}`}</h1>
-                <p>{JSON.stringify(payload)}</p>
-                <p>Showing {socialType}</p>
-                <div>
-                    <ul>
-                        {
-                            Object.keys(this.state.userPosts).map((key, i) => (
-                            <p key={i}>Hello, {this.state.userPosts.image_permalink}!</p>
-                            //this is only populating the "hello", i need a second set of eyes to find out why image_permalink isn't bringing back a value
-                        ))
-                        }
-                    </ul>
-                </div>
+        if (!socialType) {
+            return (
+                <div className="SingleContact">
+                    <h1>{`${payload.firstName} ${payload.lastName}`}</h1>
+                    <img src={payload.photos[0]}></img>
+                    <p>Email: {payload.email}</p>
                 <button onClick={this.handleSwap}>Back</button>
-            </div>
-        )
+                </div>
+            )
+        } else {
+            return (
+                <div className="SingleContact">
+                    <h1>{`${payload.firstName} ${payload.lastName}`}</h1>
+                    <p>{JSON.stringify(payload)}</p>
+                    <p>Showing {socialType}</p>
+                    <div>
+                        <ul>
+                            {
+                                Object.keys(this.state.userPosts).map((key, i) => (
+                                    <p key={i}>Hello, {this.state.userPosts.image_permalink}!</p>
+                                    //this is only populating the "hello", i need a second set of eyes to find out why image_permalink isn't bringing back a value
+                                ))
+                            }
+                        </ul>
+                    </div>
+                    }
+            <button onClick={this.handleSwap}>Back</button>
+                </div>
+            )
+        }
+
     }
 }
 
