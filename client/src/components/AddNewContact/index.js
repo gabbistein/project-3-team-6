@@ -35,7 +35,7 @@ class AddNewContact extends Component {
             email: "",
             birthday: "",
             phoneNumber: "",
-            contactPhoto: [""],
+            contactPhoto: [],
             twitter: "",
             tumblr: "",
             pinterest: "",
@@ -59,7 +59,6 @@ class AddNewContact extends Component {
             "firstName",
             "lastName",
             "email",
-            "birthday",
             "phoneNumber"
         ]
 
@@ -101,27 +100,14 @@ class AddNewContact extends Component {
                 }
             }
 
-            console.log(`No errors! Submitting ${JSON.stringify(newContact)}`);
+            console.log(`No validation errors! Submitting ${JSON.stringify(newContact)}`);
 
-            API.addContact(`/${Cookies.get("google_id")}`, newContact).catch(err => console.log(err))
+            API.addContact(`/${Cookies.get("google_id")}`, newContact)
+                .then(res => {
+                    this.props.history.push("/addressBook");
+                })
+                .catch(err => console.log(err))
 
-            alert(`${newContact.firstName} ${newContact.lastName} has been added to your contacts!`)
-
-            this.setState({
-                error: "", // Clear error message
-                firstName: "",
-                lastName: "",
-                email: "",
-                birthday: "",
-                phoneNumber: "",
-                contactPhoto: [""],
-                twitter: "",
-                tumblr: "",
-                pinterest: "",
-                notes: ""
-            })
-
-            this.props.history.push("/addressBook");
         } else {
             this.setState({
                 error: error, // Display error in 'errorMsg' <p> element

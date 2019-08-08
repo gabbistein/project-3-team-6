@@ -20,12 +20,10 @@ module.exports = {
       if (currentUser) {
         // already have the user
         console.log("User is: ", currentUser.firstName + " " + currentUser.lastName);
-        // done(null, currentUser);
       } else {
         // if not, create user in db
         db.User.create(req.body).then((newUser) => {
           console.log("new user created: " + newUser);
-          // done(null, newUser);
         })
       }
     })
@@ -38,7 +36,7 @@ module.exports = {
         { googleId: req.params.id },
         { $push: { contacts: req.body } },
         { upsert: true }
-      )
+      ).then(dbModel => { res.json(dbModel) })
       .catch(err => console.log(err));
   },
   updateContact: function (req, res) {
