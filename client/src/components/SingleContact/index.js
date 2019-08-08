@@ -5,7 +5,13 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js';
 dotenv.config();
 
 let singleStyle = {
-    paddingTop: 10
+    paddingTop: 10,
+    imageFormat: {
+        borderRadius: 5,
+        width: 128,
+        height: 128,
+        marginBottom: 10
+    }
 }
 
 class SingleContact extends Component {
@@ -32,20 +38,24 @@ class SingleContact extends Component {
             return (
                 <div className="SingleContact">
                     <h1>{`${payload.firstName} ${payload.lastName}`}</h1>
-                    <img src={payload.photos[0]}></img>
+                    {payload.photos.length < 1 ?
+                        <img src="https://via.placeholder.com/128" alt="Contact" style={singleStyle.imageFormat}></img> :
+                        <img src={payload.photos[0]} alt="Contact" style={singleStyle.imageFormat}></img> 
+                    }
                     <p>Email: {payload.email}</p>
                     <p>Phone: {parsePhoneNumberFromString("+1" + payload.phoneNumber).formatNational()}</p>
                     <p>Birthdate: {moment(payload.birthdate).format("MMM Do, YYYY")}</p>
-                    <p>Notes: {payload.notes ? payload.notes : "No notes!" }</p>
-                <button onClick={this.handleSwap}>Back</button>
+                    <p>Notes: {payload.notes ? payload.notes : "No notes!"}</p>
+                    <button onClick={this.handleSwap}>Back</button>
                 </div>
             )
         } else {
             return (
                 <div className="SingleContact">
-                    <h1>{`${payload.firstName} ${payload.lastName}`}</h1>
-                    <p>{JSON.stringify(payload)}</p>
-                    <p>Showing {socialType}</p>
+                    <h1>{`${payload.firstName} ${payload.lastName}'s ${socialType}`}</h1>
+
+                    <h3>Feature Coming Soon!</h3>
+
                     <div>
                         <ul>
                             {
@@ -56,8 +66,8 @@ class SingleContact extends Component {
                             }
                         </ul>
                     </div>
-                    }
-            <button onClick={this.handleSwap}>Back</button>
+
+                    <button onClick={this.handleSwap}>Back</button>
                 </div>
             )
         }
