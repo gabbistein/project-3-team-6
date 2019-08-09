@@ -16,6 +16,9 @@ let addressStyle = {
         fontSize: 40,
         fontWeight: "bold",
         paddingLeft: 15
+    },
+    contacts: {
+        height: "100vh"
     }
 }
 
@@ -196,7 +199,7 @@ class AddressBook extends Component {
                                 </form>
                             </Col>
                             <Col size="sm-12 md-10">
-                                <div className="pre-scrollable">
+                                <div className="pre-scrollable" style={addressStyle.contacts}>
                                     {this.renderContactView()}
                                 </div>
                             </Col>
